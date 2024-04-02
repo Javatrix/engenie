@@ -4,6 +4,9 @@
 
 using namespace std;
 
+void windowResizeCallback(GLFWwindow *, int, int);
+void processInput(GLFWwindow *);
+
 void glfwError(int error, const char *description) {
   fprintf(stderr, "Error: %s\n", description);
 }
@@ -32,12 +35,19 @@ int main(int argc, char *argv[]) {
     return -1;
   }
 
-  glClearColor(1, 0, 1, 1);
   while (!glfwWindowShouldClose(window)) {
+    processInput(window);
+
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     glfwPollEvents();
     glfwSwapBuffers(window);
   }
 
   return 0;
+}
+
+void processInput(GLFWwindow *window) {
+  if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS) {
+    glfwSetWindowShouldClose(window, true);
+  }
 }
