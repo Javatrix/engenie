@@ -1,0 +1,3 @@
+/home/javatrix/Sources/C++/OpenGL/build/_deps/battery-embed-subbuild/CMakeFiles/battery-embed-populate.dir
+/home/javatrix/Sources/C++/OpenGL/build/_deps/battery-embed-subbuild/CMakeFiles/edit_cache.dir
+/home/javatrix/Sources/C++/OpenGL/build/_deps/battery-embed-subbuild/CMakeFiles/rebuild_cache.dir

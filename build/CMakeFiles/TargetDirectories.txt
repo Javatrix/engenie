@@ -1,0 +1,5 @@
+/home/javatrix/Sources/C++/OpenGL/build/CMakeFiles/main.dir
+/home/javatrix/Sources/C++/OpenGL/build/CMakeFiles/edit_cache.dir
+/home/javatrix/Sources/C++/OpenGL/build/CMakeFiles/rebuild_cache.dir
+/home/javatrix/Sources/C++/OpenGL/build/_deps/battery-embed-build/CMakeFiles/edit_cache.dir
+/home/javatrix/Sources/C++/OpenGL/build/_deps/battery-embed-build/CMakeFiles/rebuild_cache.dir
