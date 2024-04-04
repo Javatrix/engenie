@@ -18,6 +18,10 @@ void glfwError(int error, const char *description) {
   fprintf(stderr, "Error: %s\n", description);
 }
 
+glm::vec3 cameraPos = glm::vec3(0.0f, 0.0f, 3.0f);
+glm::vec3 cameraFront = glm::vec3(0.0f, 0.0f, -1.0f);
+glm::vec3 cameraUp = glm::vec3(0.0f, 1.0f, 0.0f);
+
 int main(int argc, char *argv[]) {
   if (!glfwInit()) {
     cout << "Error loading libraries." << endl;
@@ -151,21 +155,25 @@ int main(int argc, char *argv[]) {
     shader.use();
 
     glm::mat4 model = glm::mat4(1.0f);
-    model =
-        glm::rotate(model, glm::radians((float)glfwGetTime() * 16), glm::vec3(1.0f, 0.25f, 0.5f));
+    model = glm::rotate(model, glm::radians((float)glfwGetTime() * 0),
+                        glm::vec3(1.0f, 0.25f, 0.5f));
     int modelLoc = glGetUniformLocation(shader.id, "model");
     glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
-
-    glm::mat4 view = glm::mat4(1.0f);
-    view = glm::translate(view, glm::vec3(0.0f, 0.0f, -3.0f));
-    int viewLoc = glGetUniformLocation(shader.id, "view");
-    glUniformMatrix4fv(viewLoc, 1, GL_FALSE, glm::value_ptr(view));
 
     glm::mat4 projection;
     projection = glm::perspective(
         glm::radians(45.0f), (float)windowWidth / windowHeight, 0.1f, 100.0f);
     int projectionLoc = glGetUniformLocation(shader.id, "projection");
     glUniformMatrix4fv(projectionLoc, 1, GL_FALSE, glm::value_ptr(projection));
+
+    glm::vec3 cameraTarget = cameraPos + glm::vec3(0, 0, -3);
+    glm::vec3 cameraDirection = glm::normalize(cameraPos - cameraTarget);
+    glm::vec3 up = glm::vec3(0.0f, 1.0f, 0.0f);
+    glm::vec3 cameraRight = glm::normalize(glm::cross(up, cameraDirection));
+    glm::mat4 view;
+    view = glm::lookAt(cameraPos, cameraTarget, glm::vec3(0.0f, 1.0f, 0.0f));
+    int viewLoc = glGetUniformLocation(shader.id, "view");
+    glUniformMatrix4fv(viewLoc, 1, GL_FALSE, glm::value_ptr(view));
 
     glBindVertexArray(VAO);
     glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
@@ -180,5 +188,23 @@ int main(int argc, char *argv[]) {
 void processInput(GLFWwindow *window) {
   if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS) {
     glfwSetWindowShouldClose(window, true);
+  }
+  if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS) {
+    cameraPos.z -= 0.1f;
+  }
+  if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS) {
+    cameraPos.z += 0.1f;
+  }
+  if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS) {
+    cameraPos.x -= 0.1f;
+  }
+  if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS) {
+    cameraPos.x += 0.1f;
+  }
+  if (glfwGetKey(window, GLFW_KEY_SPACE) == GLFW_PRESS) {
+    cameraPos.y += 0.1f;
+  }
+  if (glfwGetKey(window, GLFW_KEY_LEFT_SHIFT) == GLFW_PRESS) {
+    cameraPos.y -= 0.1f;
   }
 }
