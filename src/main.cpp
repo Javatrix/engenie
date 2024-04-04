@@ -51,16 +51,48 @@ int main(int argc, char *argv[]) {
   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
   float vertices[] = {
-      // positions          // colors           // texture coords
-      0.5f,  0.5f,  0.0f, 1.0f, 0.0f, 0.0f, 1.0f, 1.0f, // top right
-      0.5f,  -0.5f, 0.0f, 0.0f, 1.0f, 0.0f, 1.0f, 0.0f, // bottom right
-      -0.5f, -0.5f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f, // bottom left
-      -0.5f, 0.5f,  0.0f, 1.0f, 1.0f, 0.0f, 0.0f, 1.0f  // top left
+      // Positions          // Texture coordinates
+      // Front face
+      -0.5f, -0.5f, 0.5f, 0.0f, 0.0f, // Bottom-left
+      0.5f, -0.5f, 0.5f, 1.0f, 0.0f,  // Bottom-right
+      0.5f, 0.5f, 0.5f, 1.0f, 1.0f,   // Top-right
+      -0.5f, 0.5f, 0.5f, 0.0f, 1.0f,  // Top-left
+      // Back face
+      -0.5f, -0.5f, -0.5f, 1.0f, 0.0f, // Bottom-left
+      0.5f, -0.5f, -0.5f, 0.0f, 0.0f,  // Bottom-right
+      0.5f, 0.5f, -0.5f, 0.0f, 1.0f,   // Top-right
+      -0.5f, 0.5f, -0.5f, 1.0f, 1.0f,  // Top-left
+      // Top face
+      -0.5f, 0.5f, -0.5f, 0.0f, 0.0f, // Front-bottom-left
+      0.5f, 0.5f, -0.5f, 1.0f, 0.0f,  // Front-bottom-right
+      0.5f, 0.5f, 0.5f, 1.0f, 1.0f,   // Front-top-right
+      -0.5f, 0.5f, 0.5f, 0.0f, 1.0f,  // Front-top-left
+      // Bottom face
+      -0.5f, -0.5f, -0.5f, 0.0f, 0.0f, // Front-bottom-left
+      0.5f, -0.5f, -0.5f, 1.0f, 0.0f,  // Front-bottom-right
+      0.5f, -0.5f, 0.5f, 1.0f, 1.0f,   // Front-top-right
+      -0.5f, -0.5f, 0.5f, 0.0f, 1.0f,  // Front-top-left
+                                       // Right face
+      0.5f, -0.5f, -0.5f, 0.0f, 0.0f,  // Front-bottom-left
+      0.5f, 0.5f, -0.5f, 1.0f, 0.0f,   // Front-bottom-right
+      0.5f, 0.5f, 0.5f, 1.0f, 1.0f,    // Front-top-right
+      0.5f, -0.5f, 0.5f, 0.0f, 1.0f,   // Front-top-left
+      // Left face
+      -0.5f, -0.5f, -0.5f, 0.0f, 0.0f, // Front-bottom-left
+      -0.5f, 0.5f, -0.5f, 1.0f, 0.0f,  // Front-bottom-right
+      -0.5f, 0.5f, 0.5f, 1.0f, 1.0f,   // Front-top-right
+      -0.5f, -0.5f, 0.5f, 0.0f, 1.0f   // Front-top-left
   };
+
   unsigned int indices[] = {
-      0, 1, 3, // first triangle
-      1, 2, 3  // second triangle
+      0,  1,  2,  0,  2,  3,  // Front face
+      4,  5,  6,  4,  6,  7,  // Back face
+      8,  9,  10, 8,  10, 11, // Top face
+      12, 13, 14, 12, 14, 15, // Bottom face
+      16, 17, 18, 16, 18, 19, // Right face
+      20, 21, 22, 20, 22, 23  // Left face
   };
+
   unsigned int VBO, VAO, EBO;
   glGenVertexArrays(1, &VAO);
   glGenBuffers(1, &VBO);
@@ -75,16 +107,11 @@ int main(int argc, char *argv[]) {
   glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices,
                GL_STATIC_DRAW);
 
-  0, 0,
-      glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float),
-                            (void *)0);
+  glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void *)0);
   glEnableVertexAttribArray(0);
-  glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float),
+  glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(float),
                         (void *)(3 * sizeof(float)));
   glEnableVertexAttribArray(1);
-  glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(float),
-                        (void *)(6 * sizeof(float)));
-  glEnableVertexAttribArray(2);
 
   unsigned int texture;
   glGenTextures(1, &texture);
@@ -117,14 +144,15 @@ int main(int argc, char *argv[]) {
     glfwGetWindowSize(window, &windowWidth, &windowHeight);
     glViewport(0, 0, windowWidth, windowHeight);
 
-    glClear(GL_COLOR_BUFFER_BIT);
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    glEnable(GL_DEPTH_TEST);
 
     glBindTexture(GL_TEXTURE_2D, texture);
     shader.use();
 
     glm::mat4 model = glm::mat4(1.0f);
     model =
-        glm::rotate(model, glm::radians(-75.0f), glm::vec3(1.0f, 0.0f, 0.0f));
+        glm::rotate(model, glm::radians((float)glfwGetTime() * 16), glm::vec3(1.0f, 0.25f, 0.5f));
     int modelLoc = glGetUniformLocation(shader.id, "model");
     glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
 
@@ -134,13 +162,13 @@ int main(int argc, char *argv[]) {
     glUniformMatrix4fv(viewLoc, 1, GL_FALSE, glm::value_ptr(view));
 
     glm::mat4 projection;
-    projection =
-        glm::perspective(glm::radians(45.0f), (float) windowWidth / windowHeight, 0.1f, 100.0f);
+    projection = glm::perspective(
+        glm::radians(45.0f), (float)windowWidth / windowHeight, 0.1f, 100.0f);
     int projectionLoc = glGetUniformLocation(shader.id, "projection");
     glUniformMatrix4fv(projectionLoc, 1, GL_FALSE, glm::value_ptr(projection));
 
     glBindVertexArray(VAO);
-    glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+    glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
 
     glfwSwapBuffers(window);
     glfwPollEvents();
