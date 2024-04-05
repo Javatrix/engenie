@@ -1,0 +1,3 @@
+[submodule "external/embed"]
+	path = external/embed
+	url = https://github.com/batterycenter/embed
