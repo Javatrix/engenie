@@ -1,9 +1,9 @@
 #include "glad/glad.h"
+#include "unnamedEngine/mesh.hpp"
 #include <GLFW/glfw3.h>
 #include <iostream>
 
 #define STB_IMAGE_IMPLEMENTATION
-#include "glm/glm.hpp"
 #include "glm/gtc/matrix_transform.hpp"
 #include "glm/gtc/type_ptr.hpp"
 #include "shader.h"
@@ -54,7 +54,7 @@ int main(int argc, char *argv[]) {
                   GL_LINEAR_MIPMAP_LINEAR);
   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
-  float vertices[] = {
+  vector<float> vertices = {
       // Positions          // Texture coordinates
       // Front face
       -0.5f, -0.5f, 0.5f, 0.0f, 0.0f, // Bottom-left
@@ -88,7 +88,7 @@ int main(int argc, char *argv[]) {
       -0.5f, -0.5f, 0.5f, 0.0f, 1.0f   // Front-top-left
   };
 
-  unsigned int indices[] = {
+  vector<unsigned int> indices = {
       0,  1,  2,  0,  2,  3,  // Front face
       4,  5,  6,  4,  6,  7,  // Back face
       8,  9,  10, 8,  10, 11, // Top face
@@ -97,46 +97,7 @@ int main(int argc, char *argv[]) {
       20, 21, 22, 20, 22, 23  // Left face
   };
 
-  unsigned int VBO, VAO, EBO;
-  glGenVertexArrays(1, &VAO);
-  glGenBuffers(1, &VBO);
-  glGenBuffers(1, &EBO);
-
-  glBindVertexArray(VAO);
-
-  glBindBuffer(GL_ARRAY_BUFFER, VBO);
-  glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
-
-  glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
-  glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices,
-               GL_STATIC_DRAW);
-
-  glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void *)0);
-  glEnableVertexAttribArray(0);
-  glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(float),
-                        (void *)(3 * sizeof(float)));
-  glEnableVertexAttribArray(1);
-
-  unsigned int texture;
-  glGenTextures(1, &texture);
-  glBindTexture(GL_TEXTURE_2D, texture);
-  glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-  glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-  glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER,
-                  GL_LINEAR_MIPMAP_LINEAR);
-  glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-  stbi_set_flip_vertically_on_load(true);
-  int width, height, nrChannels;
-  unsigned char *data = stbi_load("resources/textures/texture.jpg", &width,
-                                  &height, &nrChannels, 0);
-  if (data) {
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB,
-                 GL_UNSIGNED_BYTE, data);
-    glGenerateMipmap(GL_TEXTURE_2D);
-  } else {
-    std::cout << "Failed to load texture" << std::endl;
-  }
-  stbi_image_free(data);
+  Mesh mesh(vertices, indices, "resources/textures/texture.jpg");
 
   Shader shader("resources/shaders/vertex.glsl",
                 "resources/shaders/fragment.glsl");
@@ -151,7 +112,7 @@ int main(int argc, char *argv[]) {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     glEnable(GL_DEPTH_TEST);
 
-    glBindTexture(GL_TEXTURE_2D, texture);
+    glBindTexture(GL_TEXTURE_2D, mesh.texture);
     shader.use();
 
     glm::mat4 model = glm::mat4(1.0f);
@@ -175,7 +136,7 @@ int main(int argc, char *argv[]) {
     int viewLoc = glGetUniformLocation(shader.id, "view");
     glUniformMatrix4fv(viewLoc, 1, GL_FALSE, glm::value_ptr(view));
 
-    glBindVertexArray(VAO);
+    glBindVertexArray(mesh.VAO);
     glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
 
     glfwSwapBuffers(window);

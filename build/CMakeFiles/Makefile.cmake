@@ -7,11 +7,10 @@ set(CMAKE_DEPENDS_GENERATOR "Unix Makefiles")
 # The top level Makefile was generated from the following files:
 set(CMAKE_MAKEFILE_DEPENDS
   "CMakeCache.txt"
-  "/home/javatrix/Sources/C++/OpenGL/CMakeLists.txt"
-  "CMakeFiles/3.29.1/CMakeCCompiler.cmake"
-  "CMakeFiles/3.29.1/CMakeCXXCompiler.cmake"
-  "CMakeFiles/3.29.1/CMakeSystem.cmake"
-  "_deps/battery-embed-src/CMakeLists.txt"
+  "/home/javatrix/Sources/C++/openglc-/CMakeLists.txt"
+  "CMakeFiles/3.29.2/CMakeCCompiler.cmake"
+  "CMakeFiles/3.29.2/CMakeCXXCompiler.cmake"
+  "CMakeFiles/3.29.2/CMakeSystem.cmake"
   "/usr/lib/cmake/glfw3/glfw3Config.cmake"
   "/usr/lib/cmake/glfw3/glfw3ConfigVersion.cmake"
   "/usr/lib/cmake/glfw3/glfw3Targets-none.cmake"
@@ -107,10 +106,6 @@ set(CMAKE_MAKEFILE_DEPENDS
   "/usr/share/cmake/Modules/Compiler/XLClang-CXX-DetermineCompiler.cmake"
   "/usr/share/cmake/Modules/Compiler/zOS-C-DetermineCompiler.cmake"
   "/usr/share/cmake/Modules/Compiler/zOS-CXX-DetermineCompiler.cmake"
-  "/usr/share/cmake/Modules/ExternalProject/shared_internal_commands.cmake"
-  "/usr/share/cmake/Modules/FetchContent.cmake"
-  "/usr/share/cmake/Modules/FetchContent/CMakeLists.cmake.in"
-  "/usr/share/cmake/Modules/FindGit.cmake"
   "/usr/share/cmake/Modules/FindPackageHandleStandardArgs.cmake"
   "/usr/share/cmake/Modules/FindPackageMessage.cmake"
   "/usr/share/cmake/Modules/FindThreads.cmake"
@@ -134,14 +129,12 @@ set(CMAKE_MAKEFILE_OUTPUTS
 
 # Byproducts of CMake generate step:
 set(CMAKE_MAKEFILE_PRODUCTS
-  "CMakeFiles/3.29.1/CMakeSystem.cmake"
-  "CMakeFiles/3.29.1/CMakeCCompiler.cmake"
-  "CMakeFiles/3.29.1/CMakeCXXCompiler.cmake"
-  "CMakeFiles/3.29.1/CMakeCCompiler.cmake"
-  "CMakeFiles/3.29.1/CMakeCXXCompiler.cmake"
-  "_deps/battery-embed-subbuild/CMakeLists.txt"
+  "CMakeFiles/3.29.2/CMakeSystem.cmake"
+  "CMakeFiles/3.29.2/CMakeCCompiler.cmake"
+  "CMakeFiles/3.29.2/CMakeCXXCompiler.cmake"
+  "CMakeFiles/3.29.2/CMakeCCompiler.cmake"
+  "CMakeFiles/3.29.2/CMakeCXXCompiler.cmake"
   "CMakeFiles/CMakeDirectoryInformation.cmake"
-  "_deps/battery-embed-build/CMakeFiles/CMakeDirectoryInformation.cmake"
   )
 
 # Dependency information for all targets:

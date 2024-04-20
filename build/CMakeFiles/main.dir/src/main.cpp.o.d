@@ -1,8 +1,8 @@
 CMakeFiles/main.dir/src/main.cpp.o: \
- /home/javatrix/Sources/C++/OpenGL/src/main.cpp \
+ /home/javatrix/Sources/C++/openglc-/src/main.cpp \
  /usr/include/stdc-predef.h \
- /home/javatrix/Sources/C++/OpenGL/include/glad/glad.h \
- /home/javatrix/Sources/C++/OpenGL/include/KHR/khrplatform.h \
+ /home/javatrix/Sources/C++/openglc-/include/glad/glad.h \
+ /home/javatrix/Sources/C++/openglc-/include/KHR/khrplatform.h \
  /usr/lib/gcc/x86_64-pc-linux-gnu/13.2.1/include/stdint.h \
  /usr/include/stdint.h /usr/include/bits/libc-header-start.h \
  /usr/include/features.h /usr/include/features-time64.h \
@@ -12,25 +12,47 @@ CMakeFiles/main.dir/src/main.cpp.o: \
  /usr/include/bits/types.h /usr/include/bits/typesizes.h \
  /usr/include/bits/time64.h /usr/include/bits/wchar.h \
  /usr/include/bits/stdint-intn.h /usr/include/bits/stdint-uintn.h \
- /usr/include/bits/stdint-least.h /usr/include/GLFW/glfw3.h \
+ /usr/include/bits/stdint-least.h \
+ /home/javatrix/Sources/C++/openglc-/include/unnamedEngine/mesh.hpp \
+ /home/javatrix/Sources/C++/openglc-/include/stb_image.h \
+ /usr/include/stdio.h \
  /usr/lib/gcc/x86_64-pc-linux-gnu/13.2.1/include/stddef.h \
- /usr/include/c++/13.2.1/iostream \
- /usr/include/c++/13.2.1/bits/requires_hosted.h \
+ /usr/lib/gcc/x86_64-pc-linux-gnu/13.2.1/include/stdarg.h \
+ /usr/include/bits/types/__fpos_t.h /usr/include/bits/types/__mbstate_t.h \
+ /usr/include/bits/types/__fpos64_t.h /usr/include/bits/types/__FILE.h \
+ /usr/include/bits/types/FILE.h /usr/include/bits/types/struct_FILE.h \
+ /usr/include/bits/types/cookie_io_functions_t.h \
+ /usr/include/bits/stdio_lim.h /usr/include/bits/floatn.h \
+ /usr/include/bits/floatn-common.h /usr/include/c++/13.2.1/stdlib.h \
+ /usr/include/c++/13.2.1/cstdlib \
  /usr/include/c++/13.2.1/x86_64-pc-linux-gnu/bits/c++config.h \
  /usr/include/c++/13.2.1/x86_64-pc-linux-gnu/bits/os_defines.h \
  /usr/include/c++/13.2.1/x86_64-pc-linux-gnu/bits/cpu_defines.h \
- /usr/include/c++/13.2.1/pstl/pstl_config.h \
+ /usr/include/c++/13.2.1/pstl/pstl_config.h /usr/include/stdlib.h \
+ /usr/include/bits/waitflags.h /usr/include/bits/waitstatus.h \
+ /usr/include/bits/types/locale_t.h /usr/include/bits/types/__locale_t.h \
+ /usr/include/sys/types.h /usr/include/bits/types/clock_t.h \
+ /usr/include/bits/types/clockid_t.h /usr/include/bits/types/time_t.h \
+ /usr/include/bits/types/timer_t.h /usr/include/endian.h \
+ /usr/include/bits/endian.h /usr/include/bits/endianness.h \
+ /usr/include/bits/byteswap.h /usr/include/bits/uintn-identity.h \
+ /usr/include/sys/select.h /usr/include/bits/select.h \
+ /usr/include/bits/types/sigset_t.h /usr/include/bits/types/__sigset_t.h \
+ /usr/include/bits/types/struct_timeval.h \
+ /usr/include/bits/types/struct_timespec.h \
+ /usr/include/bits/pthreadtypes.h /usr/include/bits/thread-shared-types.h \
+ /usr/include/bits/pthreadtypes-arch.h \
+ /usr/include/bits/atomic_wide_counter.h /usr/include/bits/struct_mutex.h \
+ /usr/include/bits/struct_rwlock.h /usr/include/alloca.h \
+ /usr/include/bits/stdlib-float.h /usr/include/c++/13.2.1/bits/std_abs.h \
+ /usr/include/GLFW/glfw3.h /usr/include/c++/13.2.1/iostream \
+ /usr/include/c++/13.2.1/bits/requires_hosted.h \
  /usr/include/c++/13.2.1/ostream /usr/include/c++/13.2.1/ios \
  /usr/include/c++/13.2.1/iosfwd /usr/include/c++/13.2.1/bits/stringfwd.h \
  /usr/include/c++/13.2.1/bits/memoryfwd.h \
  /usr/include/c++/13.2.1/bits/postypes.h /usr/include/c++/13.2.1/cwchar \
- /usr/include/wchar.h /usr/include/bits/floatn.h \
- /usr/include/bits/floatn-common.h \
- /usr/lib/gcc/x86_64-pc-linux-gnu/13.2.1/include/stdarg.h \
- /usr/include/bits/types/wint_t.h /usr/include/bits/types/mbstate_t.h \
- /usr/include/bits/types/__mbstate_t.h /usr/include/bits/types/__FILE.h \
- /usr/include/bits/types/FILE.h /usr/include/bits/types/locale_t.h \
- /usr/include/bits/types/__locale_t.h /usr/include/c++/13.2.1/exception \
+ /usr/include/wchar.h /usr/include/bits/types/wint_t.h \
+ /usr/include/bits/types/mbstate_t.h /usr/include/c++/13.2.1/exception \
  /usr/include/c++/13.2.1/bits/exception.h \
  /usr/include/c++/13.2.1/bits/exception_ptr.h \
  /usr/include/c++/13.2.1/bits/exception_defines.h \
@@ -44,25 +66,15 @@ CMakeFiles/main.dir/src/main.cpp.o: \
  /usr/include/c++/13.2.1/x86_64-pc-linux-gnu/bits/c++locale.h \
  /usr/include/c++/13.2.1/clocale /usr/include/locale.h \
  /usr/include/bits/locale.h /usr/include/c++/13.2.1/cctype \
- /usr/include/ctype.h /usr/include/bits/endian.h \
- /usr/include/bits/endianness.h /usr/include/c++/13.2.1/bits/ios_base.h \
+ /usr/include/ctype.h /usr/include/c++/13.2.1/bits/ios_base.h \
  /usr/include/c++/13.2.1/ext/atomicity.h \
  /usr/include/c++/13.2.1/x86_64-pc-linux-gnu/bits/gthr.h \
  /usr/include/c++/13.2.1/x86_64-pc-linux-gnu/bits/gthr-default.h \
- /usr/include/pthread.h /usr/include/sched.h \
- /usr/include/bits/types/time_t.h \
- /usr/include/bits/types/struct_timespec.h /usr/include/bits/sched.h \
+ /usr/include/pthread.h /usr/include/sched.h /usr/include/bits/sched.h \
  /usr/include/bits/types/struct_sched_param.h /usr/include/bits/cpu-set.h \
  /usr/include/time.h /usr/include/bits/time.h /usr/include/bits/timex.h \
- /usr/include/bits/types/struct_timeval.h \
- /usr/include/bits/types/clock_t.h /usr/include/bits/types/struct_tm.h \
- /usr/include/bits/types/clockid_t.h /usr/include/bits/types/timer_t.h \
- /usr/include/bits/types/struct_itimerspec.h \
- /usr/include/bits/pthreadtypes.h /usr/include/bits/thread-shared-types.h \
- /usr/include/bits/pthreadtypes-arch.h \
- /usr/include/bits/atomic_wide_counter.h /usr/include/bits/struct_mutex.h \
- /usr/include/bits/struct_rwlock.h /usr/include/bits/setjmp.h \
- /usr/include/bits/types/__sigset_t.h \
+ /usr/include/bits/types/struct_tm.h \
+ /usr/include/bits/types/struct_itimerspec.h /usr/include/bits/setjmp.h \
  /usr/include/bits/types/struct___jmp_buf_tag.h \
  /usr/include/bits/pthread_stack_min-dynamic.h \
  /usr/include/c++/13.2.1/x86_64-pc-linux-gnu/bits/atomic_word.h \
@@ -102,18 +114,7 @@ CMakeFiles/main.dir/src/main.cpp.o: \
  /usr/include/c++/13.2.1/bits/functional_hash.h \
  /usr/include/c++/13.2.1/bits/string_view.tcc \
  /usr/include/c++/13.2.1/ext/string_conversions.h \
- /usr/include/c++/13.2.1/cstdlib /usr/include/stdlib.h \
- /usr/include/bits/waitflags.h /usr/include/bits/waitstatus.h \
- /usr/include/sys/types.h /usr/include/endian.h \
- /usr/include/bits/byteswap.h /usr/include/bits/uintn-identity.h \
- /usr/include/sys/select.h /usr/include/bits/select.h \
- /usr/include/bits/types/sigset_t.h /usr/include/alloca.h \
- /usr/include/bits/stdlib-float.h /usr/include/c++/13.2.1/bits/std_abs.h \
- /usr/include/c++/13.2.1/cstdio /usr/include/stdio.h \
- /usr/include/bits/types/__fpos_t.h /usr/include/bits/types/__fpos64_t.h \
- /usr/include/bits/types/struct_FILE.h \
- /usr/include/bits/types/cookie_io_functions_t.h \
- /usr/include/bits/stdio_lim.h /usr/include/c++/13.2.1/cerrno \
+ /usr/include/c++/13.2.1/cstdio /usr/include/c++/13.2.1/cerrno \
  /usr/include/errno.h /usr/include/bits/errno.h \
  /usr/include/linux/errno.h /usr/include/asm/errno.h \
  /usr/include/asm-generic/errno.h /usr/include/asm-generic/errno-base.h \
@@ -140,9 +141,72 @@ CMakeFiles/main.dir/src/main.cpp.o: \
  /usr/include/c++/13.2.1/bits/locale_facets.tcc \
  /usr/include/c++/13.2.1/bits/basic_ios.tcc \
  /usr/include/c++/13.2.1/bits/ostream.tcc /usr/include/c++/13.2.1/istream \
- /usr/include/c++/13.2.1/bits/istream.tcc \
- /home/javatrix/Sources/C++/OpenGL/include/glm/glm.hpp \
- /home/javatrix/Sources/C++/OpenGL/include/glm/detail/_fixes.hpp \
+ /usr/include/c++/13.2.1/bits/istream.tcc /usr/include/c++/13.2.1/vector \
+ /usr/include/c++/13.2.1/bits/stl_uninitialized.h \
+ /usr/include/c++/13.2.1/bits/stl_vector.h \
+ /usr/include/c++/13.2.1/bits/stl_bvector.h \
+ /usr/include/c++/13.2.1/bits/vector.tcc \
+ /home/javatrix/Sources/C++/openglc-/include/glm/gtc/matrix_transform.hpp \
+ /home/javatrix/Sources/C++/openglc-/include/glm/gtc/../mat4x4.hpp \
+ /home/javatrix/Sources/C++/openglc-/include/glm/gtc/../detail/type_mat4x4.hpp \
+ /home/javatrix/Sources/C++/openglc-/include/glm/gtc/../detail/../fwd.hpp \
+ /home/javatrix/Sources/C++/openglc-/include/glm/gtc/../detail/../detail/type_int.hpp \
+ /home/javatrix/Sources/C++/openglc-/include/glm/gtc/../detail/../detail/setup.hpp \
+ /usr/include/c++/13.2.1/cassert /usr/include/assert.h \
+ /home/javatrix/Sources/C++/openglc-/include/glm/gtc/../detail/../detail/../simd/platform.h \
+ /usr/lib/gcc/x86_64-pc-linux-gnu/13.2.1/include/emmintrin.h \
+ /usr/lib/gcc/x86_64-pc-linux-gnu/13.2.1/include/xmmintrin.h \
+ /usr/lib/gcc/x86_64-pc-linux-gnu/13.2.1/include/mmintrin.h \
+ /usr/lib/gcc/x86_64-pc-linux-gnu/13.2.1/include/mm_malloc.h \
+ /usr/include/c++/13.2.1/cstdint \
+ /home/javatrix/Sources/C++/openglc-/include/glm/gtc/../detail/../detail/type_float.hpp \
+ /home/javatrix/Sources/C++/openglc-/include/glm/gtc/../detail/../detail/type_vec.hpp \
+ /home/javatrix/Sources/C++/openglc-/include/glm/gtc/../detail/../detail/precision.hpp \
+ /home/javatrix/Sources/C++/openglc-/include/glm/gtc/../detail/../detail/type_mat.hpp \
+ /home/javatrix/Sources/C++/openglc-/include/glm/gtc/../detail/type_vec4.hpp \
+ /home/javatrix/Sources/C++/openglc-/include/glm/gtc/../detail/type_vec4.inl \
+ /home/javatrix/Sources/C++/openglc-/include/glm/gtc/../detail/type_vec4_simd.inl \
+ /usr/include/c++/13.2.1/limits \
+ /home/javatrix/Sources/C++/openglc-/include/glm/gtc/../detail/type_mat4x4.inl \
+ /home/javatrix/Sources/C++/openglc-/include/glm/gtc/../detail/func_matrix.hpp \
+ /home/javatrix/Sources/C++/openglc-/include/glm/gtc/../detail/../vec2.hpp \
+ /home/javatrix/Sources/C++/openglc-/include/glm/gtc/../detail/../detail/type_vec2.hpp \
+ /home/javatrix/Sources/C++/openglc-/include/glm/gtc/../detail/../detail/type_vec2.inl \
+ /home/javatrix/Sources/C++/openglc-/include/glm/gtc/../detail/../vec3.hpp \
+ /home/javatrix/Sources/C++/openglc-/include/glm/gtc/../detail/../detail/type_vec3.hpp \
+ /home/javatrix/Sources/C++/openglc-/include/glm/gtc/../detail/../detail/type_vec3.inl \
+ /home/javatrix/Sources/C++/openglc-/include/glm/gtc/../detail/../vec4.hpp \
+ /home/javatrix/Sources/C++/openglc-/include/glm/gtc/../detail/../mat2x2.hpp \
+ /home/javatrix/Sources/C++/openglc-/include/glm/gtc/../detail/../detail/type_mat2x2.hpp \
+ /home/javatrix/Sources/C++/openglc-/include/glm/gtc/../detail/../detail/type_mat2x2.inl \
+ /home/javatrix/Sources/C++/openglc-/include/glm/gtc/../detail/../mat2x3.hpp \
+ /home/javatrix/Sources/C++/openglc-/include/glm/gtc/../detail/../detail/type_mat2x3.hpp \
+ /home/javatrix/Sources/C++/openglc-/include/glm/gtc/../detail/../detail/type_mat2x3.inl \
+ /home/javatrix/Sources/C++/openglc-/include/glm/gtc/../detail/../mat2x4.hpp \
+ /home/javatrix/Sources/C++/openglc-/include/glm/gtc/../detail/../detail/type_mat2x4.hpp \
+ /home/javatrix/Sources/C++/openglc-/include/glm/gtc/../detail/../detail/type_mat2x4.inl \
+ /home/javatrix/Sources/C++/openglc-/include/glm/gtc/../detail/../mat3x2.hpp \
+ /home/javatrix/Sources/C++/openglc-/include/glm/gtc/../detail/../detail/type_mat3x2.hpp \
+ /home/javatrix/Sources/C++/openglc-/include/glm/gtc/../detail/../detail/type_mat3x2.inl \
+ /home/javatrix/Sources/C++/openglc-/include/glm/gtc/../detail/../mat3x3.hpp \
+ /home/javatrix/Sources/C++/openglc-/include/glm/gtc/../detail/../detail/type_mat3x3.hpp \
+ /home/javatrix/Sources/C++/openglc-/include/glm/gtc/../detail/../detail/type_mat3x3.inl \
+ /home/javatrix/Sources/C++/openglc-/include/glm/gtc/../detail/../mat3x4.hpp \
+ /home/javatrix/Sources/C++/openglc-/include/glm/gtc/../detail/../detail/type_mat3x4.hpp \
+ /home/javatrix/Sources/C++/openglc-/include/glm/gtc/../detail/../detail/type_mat3x4.inl \
+ /home/javatrix/Sources/C++/openglc-/include/glm/gtc/../detail/../mat4x2.hpp \
+ /home/javatrix/Sources/C++/openglc-/include/glm/gtc/../detail/../detail/type_mat4x2.hpp \
+ /home/javatrix/Sources/C++/openglc-/include/glm/gtc/../detail/../detail/type_mat4x2.inl \
+ /home/javatrix/Sources/C++/openglc-/include/glm/gtc/../detail/../mat4x3.hpp \
+ /home/javatrix/Sources/C++/openglc-/include/glm/gtc/../detail/../detail/type_mat4x3.hpp \
+ /home/javatrix/Sources/C++/openglc-/include/glm/gtc/../detail/../detail/type_mat4x3.inl \
+ /home/javatrix/Sources/C++/openglc-/include/glm/gtc/../detail/func_matrix.inl \
+ /home/javatrix/Sources/C++/openglc-/include/glm/gtc/../detail/../geometric.hpp \
+ /home/javatrix/Sources/C++/openglc-/include/glm/gtc/../detail/../detail/func_geometric.hpp \
+ /home/javatrix/Sources/C++/openglc-/include/glm/gtc/../detail/../detail/func_geometric.inl \
+ /home/javatrix/Sources/C++/openglc-/include/glm/gtc/../detail/../detail/func_exponential.hpp \
+ /home/javatrix/Sources/C++/openglc-/include/glm/gtc/../detail/../detail/type_vec1.hpp \
+ /home/javatrix/Sources/C++/openglc-/include/glm/gtc/../detail/../detail/type_vec1.inl \
  /usr/include/c++/13.2.1/cmath /usr/include/math.h \
  /usr/include/bits/math-vector.h /usr/include/bits/libm-simd-decl-stubs.h \
  /usr/include/bits/flt-eval-method.h /usr/include/bits/fp-logb.h \
@@ -150,7 +214,7 @@ CMakeFiles/main.dir/src/main.cpp.o: \
  /usr/include/bits/mathcalls-helper-functions.h \
  /usr/include/bits/mathcalls.h /usr/include/bits/mathcalls-narrow.h \
  /usr/include/bits/iscanonical.h /usr/include/c++/13.2.1/bits/specfun.h \
- /usr/include/c++/13.2.1/limits /usr/include/c++/13.2.1/tr1/gamma.tcc \
+ /usr/include/c++/13.2.1/tr1/gamma.tcc \
  /usr/include/c++/13.2.1/tr1/special_function_util.h \
  /usr/include/c++/13.2.1/tr1/bessel_function.tcc \
  /usr/include/c++/13.2.1/tr1/beta_function.tcc \
@@ -162,86 +226,18 @@ CMakeFiles/main.dir/src/main.cpp.o: \
  /usr/include/c++/13.2.1/tr1/poly_hermite.tcc \
  /usr/include/c++/13.2.1/tr1/poly_laguerre.tcc \
  /usr/include/c++/13.2.1/tr1/riemann_zeta.tcc \
- /usr/include/c++/13.2.1/climits \
- /usr/lib/gcc/x86_64-pc-linux-gnu/13.2.1/include/limits.h \
- /usr/lib/gcc/x86_64-pc-linux-gnu/13.2.1/include/syslimits.h \
- /usr/include/limits.h /usr/include/bits/posix1_lim.h \
- /usr/include/bits/local_lim.h /usr/include/linux/limits.h \
- /usr/include/bits/posix2_lim.h /usr/include/bits/xopen_lim.h \
- /usr/include/bits/uio_lim.h /usr/include/c++/13.2.1/cfloat \
- /usr/lib/gcc/x86_64-pc-linux-gnu/13.2.1/include/float.h \
- /usr/include/c++/13.2.1/cassert /usr/include/assert.h \
- /home/javatrix/Sources/C++/OpenGL/include/glm/fwd.hpp \
- /home/javatrix/Sources/C++/OpenGL/include/glm/detail/type_int.hpp \
- /home/javatrix/Sources/C++/OpenGL/include/glm/detail/setup.hpp \
- /home/javatrix/Sources/C++/OpenGL/include/glm/detail/../simd/platform.h \
- /usr/lib/gcc/x86_64-pc-linux-gnu/13.2.1/include/emmintrin.h \
- /usr/lib/gcc/x86_64-pc-linux-gnu/13.2.1/include/xmmintrin.h \
- /usr/lib/gcc/x86_64-pc-linux-gnu/13.2.1/include/mmintrin.h \
- /usr/lib/gcc/x86_64-pc-linux-gnu/13.2.1/include/mm_malloc.h \
- /usr/include/c++/13.2.1/stdlib.h /usr/include/c++/13.2.1/cstdint \
- /home/javatrix/Sources/C++/OpenGL/include/glm/detail/type_float.hpp \
- /home/javatrix/Sources/C++/OpenGL/include/glm/detail/type_vec.hpp \
- /home/javatrix/Sources/C++/OpenGL/include/glm/detail/precision.hpp \
- /home/javatrix/Sources/C++/OpenGL/include/glm/detail/type_mat.hpp \
- /home/javatrix/Sources/C++/OpenGL/include/glm/vec2.hpp \
- /home/javatrix/Sources/C++/OpenGL/include/glm/detail/type_vec2.hpp \
- /home/javatrix/Sources/C++/OpenGL/include/glm/detail/type_vec2.inl \
- /home/javatrix/Sources/C++/OpenGL/include/glm/vec3.hpp \
- /home/javatrix/Sources/C++/OpenGL/include/glm/detail/type_vec3.hpp \
- /home/javatrix/Sources/C++/OpenGL/include/glm/detail/type_vec3.inl \
- /home/javatrix/Sources/C++/OpenGL/include/glm/vec4.hpp \
- /home/javatrix/Sources/C++/OpenGL/include/glm/detail/type_vec4.hpp \
- /home/javatrix/Sources/C++/OpenGL/include/glm/detail/type_vec4.inl \
- /home/javatrix/Sources/C++/OpenGL/include/glm/detail/type_vec4_simd.inl \
- /home/javatrix/Sources/C++/OpenGL/include/glm/mat2x2.hpp \
- /home/javatrix/Sources/C++/OpenGL/include/glm/detail/type_mat2x2.hpp \
- /home/javatrix/Sources/C++/OpenGL/include/glm/detail/type_mat2x2.inl \
- /home/javatrix/Sources/C++/OpenGL/include/glm/detail/func_matrix.hpp \
- /home/javatrix/Sources/C++/OpenGL/include/glm/detail/../mat2x3.hpp \
- /home/javatrix/Sources/C++/OpenGL/include/glm/detail/../detail/type_mat2x3.hpp \
- /home/javatrix/Sources/C++/OpenGL/include/glm/detail/../detail/type_mat2x3.inl \
- /home/javatrix/Sources/C++/OpenGL/include/glm/detail/../mat2x4.hpp \
- /home/javatrix/Sources/C++/OpenGL/include/glm/detail/../detail/type_mat2x4.hpp \
- /home/javatrix/Sources/C++/OpenGL/include/glm/detail/../detail/type_mat2x4.inl \
- /home/javatrix/Sources/C++/OpenGL/include/glm/detail/../mat3x2.hpp \
- /home/javatrix/Sources/C++/OpenGL/include/glm/detail/../detail/type_mat3x2.hpp \
- /home/javatrix/Sources/C++/OpenGL/include/glm/detail/../detail/type_mat3x2.inl \
- /home/javatrix/Sources/C++/OpenGL/include/glm/detail/../mat3x3.hpp \
- /home/javatrix/Sources/C++/OpenGL/include/glm/detail/../detail/type_mat3x3.hpp \
- /home/javatrix/Sources/C++/OpenGL/include/glm/detail/../detail/type_mat3x3.inl \
- /home/javatrix/Sources/C++/OpenGL/include/glm/detail/../mat3x4.hpp \
- /home/javatrix/Sources/C++/OpenGL/include/glm/detail/../detail/type_mat3x4.hpp \
- /home/javatrix/Sources/C++/OpenGL/include/glm/detail/../detail/type_mat3x4.inl \
- /home/javatrix/Sources/C++/OpenGL/include/glm/detail/../mat4x2.hpp \
- /home/javatrix/Sources/C++/OpenGL/include/glm/detail/../detail/type_mat4x2.hpp \
- /home/javatrix/Sources/C++/OpenGL/include/glm/detail/../detail/type_mat4x2.inl \
- /home/javatrix/Sources/C++/OpenGL/include/glm/detail/../mat4x3.hpp \
- /home/javatrix/Sources/C++/OpenGL/include/glm/detail/../detail/type_mat4x3.hpp \
- /home/javatrix/Sources/C++/OpenGL/include/glm/detail/../detail/type_mat4x3.inl \
- /home/javatrix/Sources/C++/OpenGL/include/glm/detail/../mat4x4.hpp \
- /home/javatrix/Sources/C++/OpenGL/include/glm/detail/../detail/type_mat4x4.hpp \
- /home/javatrix/Sources/C++/OpenGL/include/glm/detail/../detail/type_mat4x4.inl \
- /home/javatrix/Sources/C++/OpenGL/include/glm/detail/../detail/type_mat4x4_simd.inl \
- /home/javatrix/Sources/C++/OpenGL/include/glm/detail/func_matrix.inl \
- /home/javatrix/Sources/C++/OpenGL/include/glm/detail/../geometric.hpp \
- /home/javatrix/Sources/C++/OpenGL/include/glm/detail/../detail/func_geometric.hpp \
- /home/javatrix/Sources/C++/OpenGL/include/glm/detail/../detail/func_geometric.inl \
- /home/javatrix/Sources/C++/OpenGL/include/glm/detail/../detail/func_exponential.hpp \
- /home/javatrix/Sources/C++/OpenGL/include/glm/detail/../detail/type_vec1.hpp \
- /home/javatrix/Sources/C++/OpenGL/include/glm/detail/../detail/type_vec1.inl \
- /home/javatrix/Sources/C++/OpenGL/include/glm/detail/../detail/func_exponential.inl \
- /home/javatrix/Sources/C++/OpenGL/include/glm/detail/../detail/func_vector_relational.hpp \
- /home/javatrix/Sources/C++/OpenGL/include/glm/detail/../detail/func_vector_relational.inl \
- /home/javatrix/Sources/C++/OpenGL/include/glm/detail/../detail/func_vector_relational_simd.inl \
- /home/javatrix/Sources/C++/OpenGL/include/glm/detail/../detail/_vectorize.hpp \
- /home/javatrix/Sources/C++/OpenGL/include/glm/detail/../detail/func_exponential_simd.inl \
- /home/javatrix/Sources/C++/OpenGL/include/glm/detail/../detail/../simd/exponential.h \
- /home/javatrix/Sources/C++/OpenGL/include/glm/detail/../detail/func_common.hpp \
- /home/javatrix/Sources/C++/OpenGL/include/glm/detail/../detail/_fixes.hpp \
- /home/javatrix/Sources/C++/OpenGL/include/glm/detail/../detail/func_common.inl \
- /home/javatrix/Sources/C++/OpenGL/include/glm/detail/../detail/func_common_simd.inl \
- /home/javatrix/Sources/C++/OpenGL/include/glm/detail/../detail/../simd/common.h \
+ /home/javatrix/Sources/C++/openglc-/include/glm/gtc/../detail/../detail/func_exponential.inl \
+ /home/javatrix/Sources/C++/openglc-/include/glm/gtc/../detail/../detail/func_vector_relational.hpp \
+ /home/javatrix/Sources/C++/openglc-/include/glm/gtc/../detail/../detail/func_vector_relational.inl \
+ /home/javatrix/Sources/C++/openglc-/include/glm/gtc/../detail/../detail/func_vector_relational_simd.inl \
+ /home/javatrix/Sources/C++/openglc-/include/glm/gtc/../detail/../detail/_vectorize.hpp \
+ /home/javatrix/Sources/C++/openglc-/include/glm/gtc/../detail/../detail/func_exponential_simd.inl \
+ /home/javatrix/Sources/C++/openglc-/include/glm/gtc/../detail/../detail/../simd/exponential.h \
+ /home/javatrix/Sources/C++/openglc-/include/glm/gtc/../detail/../detail/func_common.hpp \
+ /home/javatrix/Sources/C++/openglc-/include/glm/gtc/../detail/../detail/_fixes.hpp \
+ /home/javatrix/Sources/C++/openglc-/include/glm/gtc/../detail/../detail/func_common.inl \
+ /home/javatrix/Sources/C++/openglc-/include/glm/gtc/../detail/../detail/func_common_simd.inl \
+ /home/javatrix/Sources/C++/openglc-/include/glm/gtc/../detail/../detail/../simd/common.h \
  /usr/lib/gcc/x86_64-pc-linux-gnu/13.2.1/include/immintrin.h \
  /usr/lib/gcc/x86_64-pc-linux-gnu/13.2.1/include/x86gprintrin.h \
  /usr/lib/gcc/x86_64-pc-linux-gnu/13.2.1/include/ia32intrin.h \
@@ -332,45 +328,36 @@ CMakeFiles/main.dir/src/main.cpp.o: \
  /usr/lib/gcc/x86_64-pc-linux-gnu/13.2.1/include/prfchwintrin.h \
  /usr/lib/gcc/x86_64-pc-linux-gnu/13.2.1/include/keylockerintrin.h \
  /usr/lib/gcc/x86_64-pc-linux-gnu/13.2.1/include/amxfp16intrin.h \
- /home/javatrix/Sources/C++/OpenGL/include/glm/detail/../detail/func_geometric_simd.inl \
- /home/javatrix/Sources/C++/OpenGL/include/glm/detail/../detail/../simd/geometric.h \
- /home/javatrix/Sources/C++/OpenGL/include/glm/detail/func_matrix_simd.inl \
- /home/javatrix/Sources/C++/OpenGL/include/glm/detail/../simd/matrix.h \
- /home/javatrix/Sources/C++/OpenGL/include/glm/trigonometric.hpp \
- /home/javatrix/Sources/C++/OpenGL/include/glm/detail/func_trigonometric.hpp \
- /home/javatrix/Sources/C++/OpenGL/include/glm/detail/func_trigonometric.inl \
- /home/javatrix/Sources/C++/OpenGL/include/glm/detail/func_trigonometric_simd.inl \
- /home/javatrix/Sources/C++/OpenGL/include/glm/exponential.hpp \
- /home/javatrix/Sources/C++/OpenGL/include/glm/common.hpp \
- /home/javatrix/Sources/C++/OpenGL/include/glm/packing.hpp \
- /home/javatrix/Sources/C++/OpenGL/include/glm/detail/func_packing.hpp \
- /home/javatrix/Sources/C++/OpenGL/include/glm/detail/func_packing.inl \
- /home/javatrix/Sources/C++/OpenGL/include/glm/detail/type_half.hpp \
- /home/javatrix/Sources/C++/OpenGL/include/glm/detail/type_half.inl \
- /home/javatrix/Sources/C++/OpenGL/include/glm/detail/func_packing_simd.inl \
- /home/javatrix/Sources/C++/OpenGL/include/glm/matrix.hpp \
- /home/javatrix/Sources/C++/OpenGL/include/glm/vector_relational.hpp \
- /home/javatrix/Sources/C++/OpenGL/include/glm/integer.hpp \
- /home/javatrix/Sources/C++/OpenGL/include/glm/detail/func_integer.hpp \
- /home/javatrix/Sources/C++/OpenGL/include/glm/detail/func_integer.inl \
- /home/javatrix/Sources/C++/OpenGL/include/glm/detail/func_integer_simd.inl \
- /home/javatrix/Sources/C++/OpenGL/include/glm/detail/../simd/integer.h \
- /home/javatrix/Sources/C++/OpenGL/include/glm/gtc/matrix_transform.hpp \
- /home/javatrix/Sources/C++/OpenGL/include/glm/gtc/../gtc/constants.hpp \
- /home/javatrix/Sources/C++/OpenGL/include/glm/gtc/../gtc/constants.inl \
- /home/javatrix/Sources/C++/OpenGL/include/glm/gtc/matrix_transform.inl \
- /home/javatrix/Sources/C++/OpenGL/include/glm/gtc/type_ptr.hpp \
- /home/javatrix/Sources/C++/OpenGL/include/glm/gtc/../gtc/quaternion.hpp \
- /home/javatrix/Sources/C++/OpenGL/include/glm/gtc/../gtc/quaternion.inl \
- /home/javatrix/Sources/C++/OpenGL/include/glm/gtc/../gtc/quaternion_simd.inl \
+ /home/javatrix/Sources/C++/openglc-/include/glm/gtc/../detail/../detail/func_geometric_simd.inl \
+ /home/javatrix/Sources/C++/openglc-/include/glm/gtc/../detail/../detail/../simd/geometric.h \
+ /home/javatrix/Sources/C++/openglc-/include/glm/gtc/../detail/func_matrix_simd.inl \
+ /home/javatrix/Sources/C++/openglc-/include/glm/gtc/../detail/../simd/matrix.h \
+ /home/javatrix/Sources/C++/openglc-/include/glm/gtc/../detail/type_mat4x4_simd.inl \
+ /home/javatrix/Sources/C++/openglc-/include/glm/gtc/../gtc/constants.hpp \
+ /home/javatrix/Sources/C++/openglc-/include/glm/gtc/../gtc/constants.inl \
+ /home/javatrix/Sources/C++/openglc-/include/glm/gtc/matrix_transform.inl \
+ /home/javatrix/Sources/C++/openglc-/include/glm/gtc/../trigonometric.hpp \
+ /home/javatrix/Sources/C++/openglc-/include/glm/gtc/../detail/func_trigonometric.hpp \
+ /home/javatrix/Sources/C++/openglc-/include/glm/gtc/../detail/func_trigonometric.inl \
+ /home/javatrix/Sources/C++/openglc-/include/glm/gtc/../detail/func_trigonometric_simd.inl \
+ /home/javatrix/Sources/C++/openglc-/include/glm/gtc/../matrix.hpp \
+ /home/javatrix/Sources/C++/openglc-/include/glm/gtc/type_ptr.hpp \
+ /home/javatrix/Sources/C++/openglc-/include/glm/gtc/../gtc/quaternion.hpp \
+ /home/javatrix/Sources/C++/openglc-/include/glm/gtc/../gtc/quaternion.inl \
+ /home/javatrix/Sources/C++/openglc-/include/glm/gtc/../gtc/../exponential.hpp \
+ /home/javatrix/Sources/C++/openglc-/include/glm/gtc/../gtc/quaternion_simd.inl \
  /usr/include/c++/13.2.1/cstring /usr/include/string.h \
  /usr/include/strings.h \
- /home/javatrix/Sources/C++/OpenGL/include/glm/gtc/type_ptr.inl \
- /home/javatrix/Sources/C++/OpenGL/include/shader.h \
+ /home/javatrix/Sources/C++/openglc-/include/glm/gtc/type_ptr.inl \
+ /home/javatrix/Sources/C++/openglc-/include/shader.h \
  /usr/include/c++/13.2.1/fstream /usr/include/c++/13.2.1/bits/codecvt.h \
  /usr/include/c++/13.2.1/x86_64-pc-linux-gnu/bits/basic_file.h \
  /usr/include/c++/13.2.1/x86_64-pc-linux-gnu/bits/c++io.h \
  /usr/include/c++/13.2.1/bits/fstream.tcc /usr/include/c++/13.2.1/sstream \
  /usr/include/c++/13.2.1/bits/sstream.tcc \
- /home/javatrix/Sources/C++/OpenGL/include/stb_image.h \
- /usr/include/c++/13.2.1/math.h
+ /usr/lib/gcc/x86_64-pc-linux-gnu/13.2.1/include/limits.h \
+ /usr/lib/gcc/x86_64-pc-linux-gnu/13.2.1/include/syslimits.h \
+ /usr/include/limits.h /usr/include/bits/posix1_lim.h \
+ /usr/include/bits/local_lim.h /usr/include/linux/limits.h \
+ /usr/include/bits/posix2_lim.h /usr/include/bits/xopen_lim.h \
+ /usr/include/bits/uio_lim.h /usr/include/c++/13.2.1/math.h

@@ -5,13 +5,13 @@
 # compile CXX with /usr/bin/c++
 C_DEFINES = 
 
-C_INCLUDES = -I/home/javatrix/Sources/C++/OpenGL/include
+C_INCLUDES = -I/home/javatrix/Sources/C++/openglc-/include
 
 C_FLAGS = 
 
 CXX_DEFINES = 
 
-CXX_INCLUDES = -I/home/javatrix/Sources/C++/OpenGL/include
+CXX_INCLUDES = -I/home/javatrix/Sources/C++/openglc-/include
 
 CXX_FLAGS = 
 

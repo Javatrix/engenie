@@ -1,2 +1,3 @@
+rm -rf ./build/*
 cd build
-make
+cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=1 .. && make
