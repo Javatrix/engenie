@@ -21,10 +21,6 @@ void glfwError(int error, const char *description) {
   fprintf(stderr, "Error: %s\n", description);
 }
 
-glm::vec3 cameraPos = glm::vec3(0.0f, 0.0f, 3.0f);
-glm::vec3 cameraFront = glm::vec3(0.0f, 0.0f, -1.0f);
-glm::vec3 cameraUp = glm::vec3(0.0f, 1.0f, 0.0f);
-
 Camera camera(glm::vec3(0, 0, 0), 45);
 Window window;
 int main(int argc, char *argv[]) {
