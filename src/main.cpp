@@ -1,5 +1,9 @@
 #include "glad/glad.h"
+#include "glm/detail/type_mat.hpp"
+#include "glm/detail/type_vec.hpp"
+#include "unnamedEngine/camera.hpp"
 #include "unnamedEngine/mesh.hpp"
+#include "unnamedEngine/window.hpp"
 #include <GLFW/glfw3.h>
 #include <iostream>
 
@@ -11,8 +15,7 @@
 
 using namespace std;
 
-void windowResizeCallback(GLFWwindow *, int, int);
-void processInput(GLFWwindow *);
+void processInput(Window &);
 
 void glfwError(int error, const char *description) {
   fprintf(stderr, "Error: %s\n", description);
@@ -22,6 +25,8 @@ glm::vec3 cameraPos = glm::vec3(0.0f, 0.0f, 3.0f);
 glm::vec3 cameraFront = glm::vec3(0.0f, 0.0f, -1.0f);
 glm::vec3 cameraUp = glm::vec3(0.0f, 1.0f, 0.0f);
 
+Camera camera(glm::vec3(0, 0, 0), 45);
+Window window;
 int main(int argc, char *argv[]) {
   if (!glfwInit()) {
     cout << "Error loading libraries." << endl;
@@ -33,13 +38,11 @@ int main(int argc, char *argv[]) {
   glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
   glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
   glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-  GLFWwindow *window =
-      glfwCreateWindow(640, 480, "An amazing GLFW example", NULL, NULL);
-  if (!window) {
+  window = Window("Epic GLFW Something", 840, 460);
+  if (!window.HANDLE) {
     cout << "Window creation failed." << endl;
     return -1;
   }
-  glfwMakeContextCurrent(window);
 
   if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress)) {
     cout << "Failed to initialize GLAD" << endl;
@@ -102,15 +105,9 @@ int main(int argc, char *argv[]) {
   Shader shader("resources/shaders/vertex.glsl",
                 "resources/shaders/fragment.glsl");
 
-  while (!glfwWindowShouldClose(window)) {
+  while (!window.shouldClose()) {
     processInput(window);
-
-    int windowWidth, windowHeight;
-    glfwGetWindowSize(window, &windowWidth, &windowHeight);
-    glViewport(0, 0, windowWidth, windowHeight);
-
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-    glEnable(GL_DEPTH_TEST);
+    window.clear();
 
     glBindTexture(GL_TEXTURE_2D, mesh.texture);
     shader.use();
@@ -121,50 +118,43 @@ int main(int argc, char *argv[]) {
     int modelLoc = glGetUniformLocation(shader.id, "model");
     glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
 
-    glm::mat4 projection;
-    projection = glm::perspective(
-        glm::radians(45.0f), (float)windowWidth / windowHeight, 0.1f, 100.0f);
+    glm::mat4 projection =
+        camera.getProjection(window.getWidth(), window.getHeight());
     int projectionLoc = glGetUniformLocation(shader.id, "projection");
     glUniformMatrix4fv(projectionLoc, 1, GL_FALSE, glm::value_ptr(projection));
 
-    glm::vec3 cameraTarget = cameraPos + glm::vec3(0, 0, -3);
-    glm::vec3 cameraDirection = glm::normalize(cameraPos - cameraTarget);
-    glm::vec3 up = glm::vec3(0.0f, 1.0f, 0.0f);
-    glm::vec3 cameraRight = glm::normalize(glm::cross(up, cameraDirection));
-    glm::mat4 view;
-    view = glm::lookAt(cameraPos, cameraTarget, glm::vec3(0.0f, 1.0f, 0.0f));
+    glm::mat4 view = camera.getView();
     int viewLoc = glGetUniformLocation(shader.id, "view");
     glUniformMatrix4fv(viewLoc, 1, GL_FALSE, glm::value_ptr(view));
 
     mesh.render();
 
-    glfwSwapBuffers(window);
-    glfwPollEvents();
+    window.update();
   }
 
   return 0;
 }
 
-void processInput(GLFWwindow *window) {
-  if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS) {
-    glfwSetWindowShouldClose(window, true);
+void processInput(Window &window) {
+  if (window.isKeyPressed(GLFW_KEY_ESCAPE) == GLFW_PRESS) {
+    window.close();
   }
-  if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS) {
-    cameraPos.z -= 0.1f;
+  if (window.isKeyPressed(GLFW_KEY_W) == GLFW_PRESS) {
+    camera.position.z -= 0.1f;
   }
-  if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS) {
-    cameraPos.z += 0.1f;
+  if (window.isKeyPressed(GLFW_KEY_S) == GLFW_PRESS) {
+    camera.position.z += 0.1f;
   }
-  if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS) {
-    cameraPos.x -= 0.1f;
+  if (window.isKeyPressed(GLFW_KEY_A) == GLFW_PRESS) {
+    camera.position.x -= 0.1f;
   }
-  if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS) {
-    cameraPos.x += 0.1f;
+  if (window.isKeyPressed(GLFW_KEY_D) == GLFW_PRESS) {
+    camera.position.x += 0.1f;
   }
-  if (glfwGetKey(window, GLFW_KEY_SPACE) == GLFW_PRESS) {
-    cameraPos.y += 0.1f;
+  if (window.isKeyPressed(GLFW_KEY_SPACE) == GLFW_PRESS) {
+    camera.position.y += 0.1f;
   }
-  if (glfwGetKey(window, GLFW_KEY_LEFT_SHIFT) == GLFW_PRESS) {
-    cameraPos.y -= 0.1f;
+  if (window.isKeyPressed(GLFW_KEY_LEFT_SHIFT) == GLFW_PRESS) {
+    camera.position.y -= 0.1f;
   }
 }

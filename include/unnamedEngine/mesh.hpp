@@ -1,5 +1,4 @@
-#ifndef MESH_H
-#define MESH_H
+#pragma once
 
 #include "glad/glad.h"
 #include "stb_image.h"
@@ -58,10 +57,9 @@ public:
   void render() {
     glBindVertexArray(VAO);
     glEnableVertexAttribArray(0);
-        glEnableVertexAttribArray(1);
-        glEnableVertexAttribArray(2);
+    glEnableVertexAttribArray(1);
+    glEnableVertexAttribArray(2);
     glBindTexture(GL_TEXTURE_2D, texture);
     glDrawElements(GL_TRIANGLES, vertexCount, GL_UNSIGNED_INT, 0);
   };
 };
-#endif

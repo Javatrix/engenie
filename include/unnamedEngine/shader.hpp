@@ -1,9 +1,7 @@
-#ifndef SHADER_H
-#define SHADER_H
-
-#include <glad/glad.h>
+#pragma once
 
 #include <fstream>
+#include <glad/glad.h>
 #include <iostream>
 #include <sstream>
 #include <string>
@@ -111,4 +109,3 @@ private:
     }
   }
 };
-#endif
