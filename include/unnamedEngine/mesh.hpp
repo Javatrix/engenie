@@ -11,9 +11,11 @@ class Mesh {
 public:
   unsigned int VAO, VBO, EBO;
   unsigned int texture;
+  int vertexCount;
   Mesh(const std::vector<float> &vertices,
        const std::vector<unsigned int> &indices,
        const std::string &textureName) {
+    vertexCount = vertices.size();
     glGenVertexArrays(1, &VAO);
     glGenBuffers(1, &VBO);
     glGenBuffers(1, &EBO);
@@ -30,10 +32,8 @@ public:
 
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(float),
                           (void *)0);
-    glEnableVertexAttribArray(0);
     glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(float),
                           (void *)(3 * sizeof(float)));
-    glEnableVertexAttribArray(1);
 
     glGenTextures(1, &texture);
     glBindTexture(GL_TEXTURE_2D, texture);
@@ -55,8 +55,13 @@ public:
     }
     stbi_image_free(data);
   };
-  void render(){
-
+  void render() {
+    glBindVertexArray(VAO);
+    glEnableVertexAttribArray(0);
+        glEnableVertexAttribArray(1);
+        glEnableVertexAttribArray(2);
+    glBindTexture(GL_TEXTURE_2D, texture);
+    glDrawElements(GL_TRIANGLES, vertexCount, GL_UNSIGNED_INT, 0);
   };
 };
 #endif

@@ -136,8 +136,7 @@ int main(int argc, char *argv[]) {
     int viewLoc = glGetUniformLocation(shader.id, "view");
     glUniformMatrix4fv(viewLoc, 1, GL_FALSE, glm::value_ptr(view));
 
-    glBindVertexArray(mesh.VAO);
-    glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
+    mesh.render();
 
     glfwSwapBuffers(window);
     glfwPollEvents();
