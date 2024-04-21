@@ -252,6 +252,11 @@ CMakeFiles/main.dir/src/main.cpp.o: \
  /home/javatrix/Sources/C++/openglc-/include/glm/gtc/matrix_transform.inl \
  /home/javatrix/Sources/C++/openglc-/include/glm/gtc/../trigonometric.hpp \
  /home/javatrix/Sources/C++/openglc-/include/glm/gtc/../matrix.hpp \
+ /home/javatrix/Sources/C++/openglc-/include/unnamedEngine/material.hpp \
+ /home/javatrix/Sources/C++/openglc-/include/glm/gtc/quaternion.hpp \
+ /home/javatrix/Sources/C++/openglc-/include/glm/gtc/quaternion.inl \
+ /home/javatrix/Sources/C++/openglc-/include/glm/gtc/../exponential.hpp \
+ /home/javatrix/Sources/C++/openglc-/include/glm/gtc/quaternion_simd.inl \
  /home/javatrix/Sources/C++/openglc-/include/unnamedEngine/mesh.hpp \
  /home/javatrix/Sources/C++/openglc-/include/stb_image.h \
  /usr/include/stdio.h \
@@ -354,7 +359,6 @@ CMakeFiles/main.dir/src/main.cpp.o: \
  /usr/include/bits/posix2_lim.h /usr/include/bits/xopen_lim.h \
  /usr/include/bits/uio_lim.h /usr/include/c++/13.2.1/cfloat \
  /usr/lib/gcc/x86_64-pc-linux-gnu/13.2.1/include/float.h \
- /home/javatrix/Sources/C++/openglc-/include/glm/exponential.hpp \
  /home/javatrix/Sources/C++/openglc-/include/glm/common.hpp \
  /home/javatrix/Sources/C++/openglc-/include/glm/packing.hpp \
  /home/javatrix/Sources/C++/openglc-/include/glm/detail/func_packing.hpp \
@@ -376,9 +380,6 @@ CMakeFiles/main.dir/src/main.cpp.o: \
  /home/javatrix/Sources/C++/openglc-/include/unnamedEngine/unnamedEngine.hpp \
  /home/javatrix/Sources/C++/openglc-/include/unnamedEngine/window.hpp \
  /home/javatrix/Sources/C++/openglc-/include/glm/gtc/type_ptr.hpp \
- /home/javatrix/Sources/C++/openglc-/include/glm/gtc/../gtc/quaternion.hpp \
- /home/javatrix/Sources/C++/openglc-/include/glm/gtc/../gtc/quaternion.inl \
- /home/javatrix/Sources/C++/openglc-/include/glm/gtc/../gtc/quaternion_simd.inl \
  /usr/include/c++/13.2.1/cstring /usr/include/string.h \
  /usr/include/strings.h \
  /home/javatrix/Sources/C++/openglc-/include/glm/gtc/type_ptr.inl \

@@ -1,4 +1,5 @@
 #pragma once
+#include "unnamedEngine/material.hpp"
 #include <glad/glad.h>
 #include <glm/glm.hpp>
 
@@ -117,6 +118,13 @@ public:
   void setMat4(const std::string &name, const glm::mat4 &mat) const {
     glUniformMatrix4fv(glGetUniformLocation(id, name.c_str()), 1, GL_FALSE,
                        &mat[0][0]);
+  }
+  // -----------------------------------------------------------------------
+  void setMaterial(const std::string &name, const Material &material) {
+    setVec3(name + ".ambient", material.ambient);
+    setVec3(name + ".diffuse", material.diffuse);
+    setFloat(name + ".specularity", material.specularity);
+    setFloat(name + ".shininess", material.shininess);
   }
 
 private:

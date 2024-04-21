@@ -4,11 +4,13 @@
 #include "glm/detail/type_mat.hpp"
 #include "glm/detail/type_vec.hpp"
 #include "unnamedEngine/camera.hpp"
+#include "unnamedEngine/material.hpp"
 #include "unnamedEngine/mesh.hpp"
 #include "unnamedEngine/shader.hpp"
 #include "unnamedEngine/unnamedEngine.hpp"
 #include "unnamedEngine/window.hpp"
 #include <GLFW/glfw3.h>
+#include <glm/fwd.hpp>
 
 #define STB_IMAGE_IMPLEMENTATION
 #include "glm/gtc/matrix_transform.hpp"
@@ -22,11 +24,14 @@ void processInput(Window &);
 Mesh mesh;
 Camera camera(glm::vec3(0, 0, 0), 45);
 Shader shader;
-glm::vec3 diffuseDir(0, -1, 0);
+glm::vec3 diffuseDir(0, -1, 0.5);
 glm::vec4 diffuseColor(1, 0.9, 0.9, 1);
 void update(Window &window) { processInput(window); }
 
 float angle = 45;
+
+Material mat(glm::vec3(0.1, 0.8, 1), glm::vec3(1, 0.8, 0.1), 1, 128);
+
 void render(Window &window) {
   shader.use();
 
@@ -38,6 +43,7 @@ void render(Window &window) {
   shader.setVec3("viewPos", camera.position);
   shader.setFloat("specularity", 0.4);
   shader.setFloat("shininess", 256);
+  shader.setMaterial("material", mat);
 
   glm::mat4 model = glm::mat4(1.0f);
   model = glm::rotate(model, glm::radians((float)glfwGetTime() * 0),
