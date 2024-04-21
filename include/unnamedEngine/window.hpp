@@ -1,5 +1,7 @@
 #pragma once
 
+#include "glad/glad.h"
+
 #include "GLFW/glfw3.h"
 #include <GL/gl.h>
 #include <string>
@@ -38,9 +40,7 @@ public:
     glfwSwapBuffers(HANDLE);
     glfwPollEvents();
   }
-  bool isKeyPressed(int key) {
-    return glfwGetKey(HANDLE, key) == GLFW_PRESS;
-  }
+  bool isKeyPressed(int key) { return glfwGetKey(HANDLE, key) == GLFW_PRESS; }
   bool isMouseButtonPressed(int button) {
     return glfwGetMouseButton(HANDLE, button) == GLFW_PRESS;
   }

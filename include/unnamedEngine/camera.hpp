@@ -6,7 +6,7 @@ class Camera {
 public:
   glm::vec3 position, rotation;
   Camera(glm::vec3 position, float fov) : position(position), fov(fov) {
-    near = 0.01f;
+    near = 0.001f;
     far = 10000;
   }
   Camera(glm::vec3 position, float fov, float near, float far)
@@ -14,7 +14,7 @@ public:
     if (near > 0 && near < far) {
       this->near = near;
     } else {
-      near = 0.01f;
+      near = 0.001f;
     }
     if (far > near) {
       this->far = far;
