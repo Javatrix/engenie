@@ -1,5 +1,7 @@
 #include "glad/glad.h"
 
+#include "glm/detail/func_common.hpp"
+#include "glm/detail/func_trigonometric.hpp"
 #include "glm/detail/type_mat.hpp"
 #include "glm/detail/type_vec.hpp"
 #include "unnamedEngine/camera.hpp"
@@ -8,6 +10,7 @@
 #include "unnamedEngine/unnamedEngine.hpp"
 #include "unnamedEngine/window.hpp"
 #include <GLFW/glfw3.h>
+#include <cmath>
 
 #define STB_IMAGE_IMPLEMENTATION
 #include "glm/gtc/matrix_transform.hpp"
@@ -21,12 +24,21 @@ void processInput(Window &);
 Mesh mesh;
 Camera camera(glm::vec3(0, 0, 0), 45);
 Shader shader;
+glm::vec4 ambientColor(0.2, 0.2, 0.2, 1);
+glm::vec3 diffuseDir(0, -1, 0);
+glm::vec4 diffuseColor(1, 0.9, 0.9, 1);
 void update(Window &window) { processInput(window); }
 
 void render(Window &window) {
   shader.use();
 
-  shader.setInt("texture0", 0);
+  float angle = glfwGetTime() * 50;
+  cout << angle << endl;
+  diffuseDir.y = glm::cos(glm::radians(angle));
+  diffuseDir.x = glm::sin(glm::radians(angle));
+  shader.setVec4("ambientColor", ambientColor);
+  shader.setVec3("diffuseDir", diffuseDir);
+  shader.setVec4("diffuseColor", diffuseColor);
 
   glm::mat4 model = glm::mat4(1.0f);
   model = glm::rotate(model, glm::radians((float)glfwGetTime() * 0),
@@ -48,7 +60,6 @@ void render(Window &window) {
 
 int main(int argc, char *argv[]) {
   unnamed_engine::initUnnamedEngine("Unnamed Engine Game", 840, 640);
-  cout << "Initialized." << endl;
 
   vector<float> vertices = {
       -0.5f, -0.5f, 0.5f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.5f, -0.5f, 0.5f, 1.0f,
@@ -89,7 +100,6 @@ int main(int argc, char *argv[]) {
   shader = Shader("resources/shaders/vertex.glsl",
                   "resources/shaders/fragment.glsl");
 
-  cout << "Starting the loop." << endl;
   unnamed_engine::loop(&update, &render);
 
   return 0;
@@ -120,7 +130,6 @@ void processInput(Window &window) {
   glfwSetInputMode(window.HANDLE, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
   camera.rotation.x -=
       (unnamed_engine::mouseY - unnamed_engine::lastMouseY) / 2.0;
-  cout << camera.rotation.x << endl;
   camera.rotation.y +=
       (unnamed_engine::mouseX - unnamed_engine::lastMouseX) / 2.0;
 }
