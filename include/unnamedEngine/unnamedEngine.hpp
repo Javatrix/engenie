@@ -12,12 +12,22 @@ inline void glfwError(int error, const char *description) {
 }
 
 Window window;
-inline void update(void (*hook)(Window &window)) { hook(window); }
+double mouseX, mouseY, lastMouseX, lastMouseY;
+inline void update(void (*hook)(Window &window)) {
+  hook(window);
+  lastMouseX = mouseX;
+  lastMouseY = mouseY;
+}
 
 inline void render(void (*hook)(Window &window)) {
   window.clear();
   hook(window);
   window.update();
+}
+
+inline void mouseInput(GLFWwindow *window, double xpos, double ypos) {
+  mouseX = xpos;
+  mouseY = ypos;
 }
 
 inline int initUnnamedEngine(std::string title, int width, int height) {
@@ -37,6 +47,8 @@ inline int initUnnamedEngine(std::string title, int width, int height) {
     std::cout << "Window creation failed." << std::endl;
     return -1;
   }
+
+  glfwSetCursorPosCallback(window.HANDLE, mouseInput);
 
   glfwMakeContextCurrent(window.HANDLE);
   if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress)) {

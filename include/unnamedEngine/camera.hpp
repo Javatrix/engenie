@@ -4,7 +4,7 @@
 #include "glm/gtc/matrix_transform.hpp"
 class Camera {
 public:
-  glm::vec3 position, rotation;
+  glm::vec3 position, rotation, direction, right;
   Camera(glm::vec3 position, float fov) : position(position), fov(fov) {
     near = 0.001f;
     far = 10000;
@@ -51,11 +51,12 @@ public:
                             (float)windowWidth / windowHeight, near, far);
   }
   glm::mat4 getView() {
-    glm::vec3 target = position + glm::vec3(0, 0, -1);
-    glm::vec3 direction = glm::normalize(position - target);
-    glm::vec3 up = glm::vec3(0.0f, 1.0f, 0.0f);
-    glm::vec3 right = glm::normalize(glm::cross(up, direction));
-    return glm::lookAt(position, target, glm::vec3(0.0f, 1.0f, 0.0f));
+    direction.x = cos(glm::radians(rotation.y)) * cos(glm::radians(rotation.x));
+    direction.y = sin(glm::radians(rotation.x));
+    direction.z = sin(glm::radians(rotation.y)) * cos(glm::radians(rotation.x));
+    direction = glm::normalize(direction);
+    right = glm::normalize(glm::cross(direction, glm::vec3(0, 1, 0)));
+    return glm::lookAt(position, position + direction, glm::normalize(glm::cross(right, direction)));
   }
 
 private:

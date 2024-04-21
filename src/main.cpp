@@ -7,6 +7,7 @@
 #include "unnamedEngine/shader.hpp"
 #include "unnamedEngine/unnamedEngine.hpp"
 #include "unnamedEngine/window.hpp"
+#include <GLFW/glfw3.h>
 
 #define STB_IMAGE_IMPLEMENTATION
 #include "glm/gtc/matrix_transform.hpp"
@@ -86,7 +87,7 @@ int main(int argc, char *argv[]) {
   mesh = Mesh(vertices, indices, "resources/textures/texture.jpg");
 
   shader = Shader("resources/shaders/vertex.glsl",
-                "resources/shaders/fragment.glsl");
+                  "resources/shaders/fragment.glsl");
 
   cout << "Starting the loop." << endl;
   unnamed_engine::loop(&update, &render);
@@ -99,16 +100,16 @@ void processInput(Window &window) {
     window.close();
   }
   if (window.isKeyPressed(GLFW_KEY_W)) {
-    camera.position.z -= 0.1f;
+    camera.position += 0.1f * camera.direction;
   }
   if (window.isKeyPressed(GLFW_KEY_S)) {
-    camera.position.z += 0.1f;
+    camera.position -= 0.1f * camera.direction;
   }
   if (window.isKeyPressed(GLFW_KEY_A)) {
-    camera.position.x -= 0.1f;
+    camera.position -= 0.1f * camera.right;
   }
   if (window.isKeyPressed(GLFW_KEY_D)) {
-    camera.position.x += 0.1f;
+    camera.position += 0.1f * camera.right;
   }
   if (window.isKeyPressed(GLFW_KEY_SPACE)) {
     camera.position.y += 0.1f;
@@ -116,4 +117,10 @@ void processInput(Window &window) {
   if (window.isKeyPressed(GLFW_KEY_LEFT_SHIFT)) {
     camera.position.y -= 0.1f;
   }
+  glfwSetInputMode(window.HANDLE, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+  camera.rotation.x -=
+      (unnamed_engine::mouseY - unnamed_engine::lastMouseY) / 2.0;
+  cout << camera.rotation.x << endl;
+  camera.rotation.y +=
+      (unnamed_engine::mouseX - unnamed_engine::lastMouseX) / 2.0;
 }
