@@ -28,15 +28,16 @@ glm::vec3 diffuseDir(0, -1, 0.5);
 glm::vec4 diffuseColor(1, 0.9, 0.9, 1);
 void update(Window &window) { processInput(window); }
 
-float angle = 45;
+float angle = 45, angle2;
 
-Material mat(glm::vec3(0.1, 0.8, 1), glm::vec3(1, 0.8, 0.1), 1, 128);
+Material mat(glm::vec3(0.1, 0.8, 1), glm::vec3(1, 0.8, 0.1), 0.4, 64);
 
 void render(Window &window) {
   shader.use();
 
   diffuseDir.y = glm::cos(glm::radians(angle));
   diffuseDir.x = glm::sin(glm::radians(angle));
+  diffuseDir.z = glm::sin(glm::radians(angle2));
   shader.setFloat("ambientStrength", 0.2);
   shader.setVec3("diffuseDir", diffuseDir);
   shader.setVec4("diffuseColor", diffuseColor);
@@ -136,6 +137,11 @@ void processInput(Window &window) {
     angle += 5;
   } else if (window.isKeyPressed(GLFW_KEY_LEFT)) {
     angle -= 5;
+  }
+  if (window.isKeyPressed(GLFW_KEY_UP)) {
+    angle2 += 5;
+  } else if (window.isKeyPressed(GLFW_KEY_DOWN)) {
+    angle2 -= 5;
   }
   glfwSetInputMode(window.HANDLE, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
   camera.rotation.x -=
