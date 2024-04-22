@@ -47,8 +47,8 @@ void render(Window &window) {
   shader.setMaterial("material", mat);
 
   glm::mat4 model = glm::mat4(1.0f);
-  model = glm::rotate(model, glm::radians((float)glfwGetTime() * 0),
-                      glm::vec3(1.0f, 0.25f, 0.5f));
+  model = glm::rotate(model, glm::radians((float)glfwGetTime() * 30),
+                      glm::vec3(1.0f, 0, 0));
   int modelLoc = glGetUniformLocation(shader.id, "model");
   glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
 
