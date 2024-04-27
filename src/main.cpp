@@ -10,7 +10,9 @@
 #include "unnamedEngine/unnamedEngine.hpp"
 #include "unnamedEngine/window.hpp"
 #include <GLFW/glfw3.h>
+#include <cstdlib>
 #include <glm/fwd.hpp>
+#include <vector>
 
 #define STB_IMAGE_IMPLEMENTATION
 #include "glm/gtc/matrix_transform.hpp"
@@ -32,6 +34,8 @@ float angle = 45, angle2;
 
 Material mat(glm::vec3(0.1, 0.8, 1), glm::vec3(1, 0.8, 0.1), 0.4, 64);
 
+int cubes = 1000;
+vector<float> positions;
 void render(Window &window) {
   shader.use();
 
@@ -46,12 +50,6 @@ void render(Window &window) {
   shader.setFloat("shininess", 256);
   shader.setMaterial("material", mat);
 
-  glm::mat4 model = glm::mat4(1.0f);
-  model = glm::rotate(model, glm::radians((float)glfwGetTime() * 30),
-                      glm::vec3(1.0f, 0, 0));
-  int modelLoc = glGetUniformLocation(shader.id, "model");
-  glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
-
   glm::mat4 projection =
       camera.getProjection(window.getWidth(), window.getHeight());
   int projectionLoc = glGetUniformLocation(shader.id, "projection");
@@ -61,51 +59,34 @@ void render(Window &window) {
   int viewLoc = glGetUniformLocation(shader.id, "view");
   glUniformMatrix4fv(viewLoc, 1, GL_FALSE, glm::value_ptr(view));
 
+  glm::mat4 model = glm::mat4(1.0f);
+  model = glm::rotate(model, (float)glfwGetTime(), glm::vec3(1, 0, 0));
+  shader.setMat4("model", model);
   mesh.render();
+
+  for (size_t i = 0; i < cubes; i++) {
+    float x = positions[i];
+    float y = positions[i + 1];
+    float z = positions[i + 2];
+    glm::mat4 model = glm::mat4(1.0f);
+    model = glm::rotate(glm::translate(model, glm::vec3(x, y, z)),
+                        (float)glfwGetTime(), glm::vec3(1, 0, 0));
+    shader.setMat4("model", model);
+    mesh.render();
+  }
 }
 
 int main(int argc, char *argv[]) {
   unnamed_engine::initUnnamedEngine("Unnamed Engine Game", 840, 640);
 
-  vector<float> vertices = {
-      -0.5f, -0.5f, 0.5f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.5f, -0.5f, 0.5f, 1.0f,
-      0.0f, 0.0f, 0.0f, 1.0f, 0.5f, 0.5f, 0.5f, 1.0f, 1.0f, 0.0f, 0.0f, 1.0f,
-      -0.5f, 0.5f, 0.5f, 0.0f, 1.0f, 0.0f, 0.0f, 1.0f,
-      // Back face
-      -0.5f, -0.5f, -0.5f, 1.0f, 0.0f, 0.0f, 0.0f, -1.0f, 0.5f, -0.5f, -0.5f,
-      0.0f, 0.0f, 0.0f, 0.0f, -1.0f, 0.5f, 0.5f, -0.5f, 0.0f, 1.0f, 0.0f, 0.0f,
-      -1.0f, -0.5f, 0.5f, -0.5f, 1.0f, 1.0f, 0.0f, 0.0f, -1.0f,
-      // Top face
-      0.5f, 0.5f, 0.5f, 1.0f, 0.0f, 0.0f, 1.0f, 0.0f, -0.5f, 0.5f, 0.5f, 0.0f,
-      0.0f, 0.0f, 1.0f, 0.0f, -0.5f, 0.5f, -0.5f, 0.0f, 1.0f, 0.0f, 1.0f, 0.0f,
-      0.5f, 0.5f, -0.5f, 1.0f, 1.0f, 0.0f, 1.0f, 0.0f,
-      // Bottom face
-      -0.5f, -0.5f, 0.5f, 1.0f, 1.0f, 0.0f, -1.0f, 0.0f, 0.5f, -0.5f, 0.5f,
-      0.0f, 1.0f, 0.0f, -1.0f, 0.0f, 0.5f, -0.5f, -0.5f, 0.0f, 0.0f, 0.0f,
-      -1.0f, 0.0f, -0.5f, -0.5f, -0.5f, 1.0f, 0.0f, 0.0f, -1.0f, 0.0f,
-      // Right face
-      0.5f, -0.5f, 0.5f, 1.0f, 0.0f, 1.0f, 0.0f, 0.0f, 0.5f, -0.5f, -0.5f, 0.0f,
-      0.0f, 1.0f, 0.0f, 0.0f, 0.5f, 0.5f, -0.5f, 0.0f, 1.0f, 1.0f, 0.0f, 0.0f,
-      0.5f, 0.5f, 0.5f, 1.0f, 1.0f, 1.0f, 0.0f, 0.0f,
-      // Left face
-      -0.5f, -0.5f, 0.5f, 0.0f, 0.0f, -1.0f, 0.0f, 0.0f, -0.5f, -0.5f, -0.5f,
-      1.0f, 0.0f, -1.0f, 0.0f, 0.0f, -0.5f, 0.5f, -0.5f, 1.0f, 1.0f, -1.0f,
-      0.0f, 0.0f, -0.5f, 0.5f, 0.5f, 0.0f, 1.0f, -1.0f, 0.0f, 0.0f};
-
-  vector<unsigned int> indices = {
-      0,  1,  2,  0,  2,  3,  // Front face
-      4,  5,  6,  4,  6,  7,  // Back face
-      8,  9,  10, 8,  10, 11, // Top face
-      12, 13, 14, 12, 14, 15, // Bottom face
-      16, 17, 18, 16, 18, 19, // Right face
-      20, 21, 22, 20, 22, 23  // Left face
-  };
-
-  mesh = Mesh(vertices, indices, "resources/textures/texture.jpg");
+  mesh = Mesh("resources/models/suzanne.dae", "resources/textures/texture.jpg");
 
   shader = Shader("resources/shaders/vertex.glsl",
                   "resources/shaders/fragment.glsl");
 
+  for (size_t i = 0; i < cubes; i++) {
+    positions.push_back(random() % 100 - 50);
+  }
   unnamed_engine::loop(&update, &render);
 
   return 0;

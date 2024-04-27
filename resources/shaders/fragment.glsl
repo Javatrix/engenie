@@ -20,7 +20,7 @@ uniform vec4 diffuseColor;
 uniform vec3 viewPos;
 
 void main() {
-  vec3 normal = (model * vec4(FragNormal, 1)).xyz;
+  vec3 normal = normalize((model * vec4(FragNormal, 1)).xyz);
   vec4 ambientLight = vec4(ambientStrength, ambientStrength, ambientStrength, 1);
   vec4 diffuseLight = diffuseColor * max(0, -dot(normalize(diffuseDir), normal));
   vec3 viewDir = normalize(viewPos - FragPos);

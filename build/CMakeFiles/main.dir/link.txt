@@ -1,1 +1,1 @@
-/usr/bin/c++ CMakeFiles/main.dir/src/glad.c.o CMakeFiles/main.dir/src/main.cpp.o -o main  /usr/lib/libglfw.so.3.4 -lGL
+/usr/bin/c++ CMakeFiles/main.dir/src/glad.c.o CMakeFiles/main.dir/src/main.cpp.o -o main  /usr/lib/libglfw.so.3.4 -lGL -lassimp
