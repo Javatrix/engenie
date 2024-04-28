@@ -8,6 +8,7 @@
 #include <GLFW/glfw3.h>
 #include <algorithm>
 #include <assimp/Importer.hpp>
+#include <assimp/mesh.h>
 #include <assimp/postprocess.h>
 #include <assimp/scene.h>
 #include <cstddef>
@@ -54,43 +55,44 @@ public:
                 << std::endl;
     }
 
-    aiMesh *mesh = scene->mMeshes[0];
-    vector<Vertex> nonIndexedVertices;
-    for (unsigned int j = 0; j < mesh->mNumVertices; ++j) {
-      Vertex v;
-      aiVector3D vertex = mesh->mVertices[j];
-      v.position = glm::vec3(vertex.x, vertex.y, vertex.z);
-      nonIndexedVertices.push_back(v);
-      if (find(vertices.begin(), vertices.end(), v) == vertices.end()) {
-        vertices.push_back(v);
+    for (size_t meshIndex = 0; meshIndex < scene->mNumMeshes; meshIndex++) {
+      aiMesh *mesh = scene->mMeshes[meshIndex];
+      vector<Vertex> nonIndexedVertices;
+      for (unsigned int j = 0; j < mesh->mNumVertices; ++j) {
+        Vertex v;
+        aiVector3D vertex = mesh->mVertices[j];
+        v.position = glm::vec3(vertex.x, vertex.y, vertex.z);
+        nonIndexedVertices.push_back(v);
+        if (find(vertices.begin(), vertices.end(), v) == vertices.end()) {
+          vertices.push_back(v);
+        }
+
+        if (mesh->HasNormals()) {
+          aiVector3D normal = mesh->mNormals[j];
+          v.normal = glm::vec3(normal.x, normal.y, normal.z);
+        } else {
+          v.normal = glm::vec3(0.0f, 0.0f, 0.0f);
+        }
+
+        if (mesh->HasTextureCoords(0)) {
+          aiVector3D texCoord = mesh->mTextureCoords[0][j];
+          v.textureCoords = glm::vec2(texCoord.x, texCoord.y);
+        } else {
+          v.textureCoords = glm::vec2(0.0f, 0.0f);
+        }
       }
 
-      if (mesh->HasNormals()) {
-        aiVector3D normal = mesh->mNormals[j];
-        v.normal = glm::vec3(normal.x, normal.y, normal.z);
-      } else {
-        v.normal = glm::vec3(0.0f, 0.0f, 0.0f);
-      }
-
-      if (mesh->HasTextureCoords(0)) {
-        aiVector3D texCoord = mesh->mTextureCoords[0][j];
-        v.textureCoords = glm::vec2(texCoord.x, texCoord.y);
-      } else {
-        v.textureCoords = glm::vec2(0.0f, 0.0f);
+      // Populate indices
+      for (unsigned int i = 0; i < mesh->mNumFaces; ++i) {
+        aiFace face = mesh->mFaces[i];
+        for (unsigned int j = 0; j < face.mNumIndices; ++j) {
+          uint index = distance(vertices.begin(),
+                                find(vertices.begin(), vertices.end(),
+                                     nonIndexedVertices[face.mIndices[j]]));
+          indices.push_back(index);
+        }
       }
     }
-
-    // Populate indices
-    for (unsigned int i = 0; i < mesh->mNumFaces; ++i) {
-      aiFace face = mesh->mFaces[i];
-      for (unsigned int j = 0; j < face.mNumIndices; ++j) {
-        uint index = distance(vertices.begin(),
-                              find(vertices.begin(), vertices.end(),
-                                   nonIndexedVertices[face.mIndices[j]]));
-        indices.push_back(index);
-      }
-    }
-
     // Generate OpenGL buffers
     glGenVertexArrays(1, &vao);
     glGenBuffers(1, &vbo);
