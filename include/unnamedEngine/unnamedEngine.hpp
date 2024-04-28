@@ -96,6 +96,8 @@ public:
     if (!getInstance()) {
       return;
     }
+    getInstance()->mouseX = xpos;
+    getInstance()->mouseY = ypos;
     for (auto listener : getInstance()->listeners) {
       listener(xpos, ypos);
     }
