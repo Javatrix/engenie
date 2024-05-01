@@ -10,9 +10,7 @@
 #include "unnamedEngine/unnamedEngine.hpp"
 #include "unnamedEngine/window.hpp"
 #include <GLFW/glfw3.h>
-#include <cstdlib>
 #include <glm/fwd.hpp>
-#include <vector>
 
 #define STB_IMAGE_IMPLEMENTATION
 #include "glm/gtc/matrix_transform.hpp"
@@ -32,16 +30,12 @@ Shader shader;
 glm::vec3 diffuseDir(0, -1, 0.5);
 glm::vec4 diffuseColor(1, 0.9, 0.9, 1);
 
-void update() {
-  processInput();
-}
+void update() { processInput(); }
 
 float angle = 45, angle2;
 
 Material mat(glm::vec3(0.1, 0.8, 1), glm::vec3(1, 0.8, 0.1), 0.4, 64);
 
-int cubes = 1;
-vector<float> positions;
 void render() {
   shader.use();
 
@@ -69,17 +63,6 @@ void render() {
   model = glm::rotate(model, (float)glfwGetTime(), glm::vec3(0, 1, 0));
   shader.setMat4("model", model);
   mesh.render();
-  //
-  // for (size_t i = 0; i < cubes; i++) {
-  //   float x = positions[i];
-  //   float y = positions[i + 1];
-  //   float z = positions[i + 2];
-  //   glm::mat4 model = glm::mat4(1.0f);
-  //   model = glm::rotate(glm::translate(model, glm::vec3(x, y, z)),
-  //                       (float)glfwGetTime(), glm::vec3(1, 0, 0));
-  //   shader.setMat4("model", model);
-  //   mesh.render();
-  // }
 }
 
 int main(int argc, char *argv[]) {
@@ -90,13 +73,6 @@ int main(int argc, char *argv[]) {
 
   shader = Shader("resources/shaders/vertex.glsl",
                   "resources/shaders/fragment.glsl");
-
-  for (size_t i = 0; i < cubes; i++) {
-    positions.push_back(random() % 100 - 50);
-  }
-  engine::getInstance()->loop(&update, &render);
-
-  return 0;
 }
 
 void processInput() {
