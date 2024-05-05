@@ -6,9 +6,5 @@
 class RenderBatch {
 public:
   std::unordered_set<IRenderable *> renderables;
-  void render() {
-    for (IRenderable *renderable : renderables) {
-      renderable->render();
-    }
-  }
+  void render();
 };
