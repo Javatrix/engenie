@@ -3,10 +3,7 @@
 class Entity;
 
 class IEntityComponent {
-private:
-  Entity *parent;
-
 public:
-  IEntityComponent(Entity *parent) : parent(parent) {}
-  virtual void updateParent() = 0;
+  IEntityComponent() {}
+  virtual void updateParent(Entity &parent) = 0;
 };

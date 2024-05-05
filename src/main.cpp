@@ -4,6 +4,9 @@
 #include "glm/detail/type_mat.hpp"
 #include "glm/detail/type_vec.hpp"
 #include "unnamedEngine/camera.hpp"
+#include "unnamedEngine/component/component.hpp"
+#include "unnamedEngine/component/renderablecomponent.hpp"
+#include "unnamedEngine/entity.hpp"
 #include "unnamedEngine/material.hpp"
 #include "unnamedEngine/mesh.hpp"
 #include "unnamedEngine/shader.hpp"
@@ -24,9 +27,7 @@ Window window;
 
 void processInput();
 
-Mesh mesh;
 Camera camera(glm::vec3(0, 0, 0), 45);
-Shader shader;
 glm::vec3 diffuseDir(0, -1, 0.5);
 glm::vec4 diffuseColor(1, 0.9, 0.9, 1);
 
@@ -36,43 +37,50 @@ float angle = 45, angle2;
 
 Material mat(glm::vec3(0.1, 0.8, 1), glm::vec3(1, 0.8, 0.1), 0.4, 64);
 
+Entity entity;
+
 void render() {
-  shader.use();
+  Shader *shader = entity.getComponent<RenderableComponent>()->shader;
 
   diffuseDir.y = glm::cos(glm::radians(angle));
   diffuseDir.x = glm::sin(glm::radians(angle));
   diffuseDir.z = glm::sin(glm::radians(angle2));
-  shader.setFloat("ambientStrength", 0.2);
-  shader.setVec3("diffuseDir", diffuseDir);
-  shader.setVec4("diffuseColor", diffuseColor);
-  shader.setVec3("viewPos", camera.position);
-  shader.setFloat("specularity", 0.4);
-  shader.setFloat("shininess", 256);
-  shader.setMaterial("material", mat);
+  shader->setFloat("ambientStrength", 0.2);
+  shader->setVec3("diffuseDir", diffuseDir);
+  shader->setVec4("diffuseColor", diffuseColor);
+  shader->setVec3("viewPos", camera.position);
+  shader->setFloat("specularity", 0.4);
+  shader->setFloat("shininess", 256);
+  shader->setMaterial("material", mat);
 
   glm::mat4 projection =
       camera.getProjection(window.getWidth(), window.getHeight());
-  int projectionLoc = glGetUniformLocation(shader.id, "projection");
+  int projectionLoc = glGetUniformLocation(shader->id, "projection");
   glUniformMatrix4fv(projectionLoc, 1, GL_FALSE, glm::value_ptr(projection));
 
   glm::mat4 view = camera.getView();
-  int viewLoc = glGetUniformLocation(shader.id, "view");
+  int viewLoc = glGetUniformLocation(shader->id, "view");
   glUniformMatrix4fv(viewLoc, 1, GL_FALSE, glm::value_ptr(view));
 
   glm::mat4 model = glm::mat4(1.0f);
   model = glm::rotate(model, (float)glfwGetTime(), glm::vec3(0, 1, 0));
-  shader.setMat4("model", model);
-  mesh.render();
+  shader->setMat4("model", model);
+  entity.getComponent<RenderableComponent>()->render();
 }
 
 int main(int argc, char *argv[]) {
   engine::getInstance()->init("Unnamed Engine", 840, 680);
   window = engine::getInstance()->window;
 
-  mesh = Mesh("resources/models/xiao.glb", "resources/textures/texture.jpg");
+  Mesh mesh =
+      Mesh("resources/models/xiao.glb", "resources/textures/texture.jpg");
 
-  shader = Shader("resources/shaders/vertex.glsl",
-                  "resources/shaders/fragment.glsl");
+  Shader shader = Shader("resources/shaders/vertex.glsl",
+                         "resources/shaders/fragment.glsl");
+
+  entity.addComponent(new RenderableComponent(&mesh, &shader));
+
+  engine::getInstance()->loop(update, render);
 }
 
 void processInput() {

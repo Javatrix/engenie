@@ -3,9 +3,10 @@
 #include "glad/glad.h"
 
 #include "GLFW/glfw3.h"
+#include "unnamedEngine/commons.hpp"
 #include "unnamedEngine/window.hpp"
+#include <algorithm>
 #include <cstdio>
-#include <functional>
 #include <iostream>
 #include <vector>
 
@@ -17,6 +18,7 @@ inline void glfwError(int error, const char *description) {
 class Engine {
 private:
   static Engine *instance;
+  RenderBatch renderBatch;
   std::vector<void (*)(double mouseX, double mouseY)> listeners;
 
 public:
@@ -78,8 +80,15 @@ public:
   }
   void render(void (*hook)()) {
     window.clear();
+    renderBatch.render();
     hook();
     window.update();
+  }
+  void addRenderable(IRenderable *renderable) {
+    renderBatch.renderables.insert(renderable);
+  }
+  void removeRenderable(IRenderable *renderable) {
+    renderBatch.renderables.erase(renderable);
   }
   void addMouseListener(void (*listener)(double mouseX, double mouseY)) {
     listeners.push_back(listener);
