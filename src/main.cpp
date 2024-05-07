@@ -34,6 +34,7 @@ glm::vec4 diffuseColor(1, 0.9, 0.9, 1);
 void update() { processInput(); }
 
 float angle = 45, angle2;
+Mesh mesh;
 
 Material mat(glm::vec3(0.1, 0.8, 1), glm::vec3(1, 0.8, 0.1), 0.4, 64);
 
@@ -72,11 +73,11 @@ int main(int argc, char *argv[]) {
   engine::getInstance()->init("Unnamed Engine", 840, 680);
   window = engine::getInstance()->window;
 
-  Mesh mesh =
+  mesh =
       Mesh("resources/models/xiao.glb", "resources/textures/texture.jpg");
 
-  Shader shader = Shader("resources/shaders/vertex.glsl",
-                         "resources/shaders/fragment.glsl");
+  Shader shader = Shader("resources/shaders/min_vertex.glsl",
+                         "resources/shaders/min_fragment.glsl");
 
   entity.addComponent(new RenderableComponent(&mesh, &shader));
 

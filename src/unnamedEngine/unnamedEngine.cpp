@@ -1,7 +1,21 @@
 #include "unnamedEngine/unnamedEngine.hpp"
-namespace unnamed_engine {
+
+#include <algorithm>
+#include <iostream>
+
 void glfwError(int error, const char *description) {
   fprintf(stderr, "GLFW error: %s\n", description);
+}
+
+using namespace unnamed_engine;
+
+Engine *Engine::instance = nullptr;
+
+Engine *Engine::getInstance() {
+  if (!instance) {
+    instance = new Engine();
+  }
+  return instance;
 }
 
 void Engine::init(const std::string &windowTitle, int windowWidth,
@@ -91,4 +105,3 @@ void Engine::mouseInput(GLFWwindow *window, double xpos, double ypos) {
     listener(xpos, ypos);
   }
 }
-}; // namespace unnamed_engine

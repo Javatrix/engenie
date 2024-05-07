@@ -18,12 +18,7 @@ public:
   bool limitFPS = true;
   int updateRate = 20, fps = 60;
   Engine() {}
-  static Engine *getInstance() {
-    if (!instance) {
-      instance = new Engine();
-    }
-    return instance;
-  }
+  static Engine *getInstance();
   void init(const std::string &windowTitle, int windowWidth, int windowHeight);
   void loop(void (*updateHook)(), void (*renderHook)());
   void update(void (*hook)());
