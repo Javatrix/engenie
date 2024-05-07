@@ -1,19 +1,20 @@
 #include "unnamedEngine/entity.hpp"
+#include <memory>
 
 void Entity::update() {
   lastPosition = position;
   lastRotation = rotation;
   lastScale = scale;
 
-  for (IEntityComponent *component : components) {
+  for (std::shared_ptr<IEntityComponent> component : components) {
     component->updateParent(*this);
   }
 }
 
-void Entity::addComponent(IEntityComponent *component) {
+void Entity::addComponent(std::shared_ptr<IEntityComponent> component) {
   components.insert(component);
 }
 
-void Entity::removeComponent(IEntityComponent *component) {
+void Entity::removeComponent(std::shared_ptr<IEntityComponent> component) {
   components.erase(component);
 }

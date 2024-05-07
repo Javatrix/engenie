@@ -14,7 +14,7 @@ private:
 
 public:
   Window window;
-  double mouseX, mouseY, lastMouseX, lastMouseY;
+  double mouseX = 0, mouseY = 0, lastMouseX = 0, lastMouseY = 0;
   bool limitFPS = true;
   int updateRate = 20, fps = 60;
   Engine() {}

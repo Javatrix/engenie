@@ -14,6 +14,9 @@
 #include "unnamedEngine/window.hpp"
 #include <GLFW/glfw3.h>
 #include <glm/fwd.hpp>
+#include <iostream>
+#include <memory>
+#include <ostream>
 
 #define STB_IMAGE_IMPLEMENTATION
 #include "glm/gtc/matrix_transform.hpp"
@@ -56,12 +59,10 @@ void render() {
 
   glm::mat4 projection =
       camera.getProjection(window.getWidth(), window.getHeight());
-  int projectionLoc = glGetUniformLocation(shader->id, "projection");
-  glUniformMatrix4fv(projectionLoc, 1, GL_FALSE, glm::value_ptr(projection));
+  shader->setMat4("projection", projection);
 
   glm::mat4 view = camera.getView();
-  int viewLoc = glGetUniformLocation(shader->id, "view");
-  glUniformMatrix4fv(viewLoc, 1, GL_FALSE, glm::value_ptr(view));
+  shader->setMat4("view", view);
 
   glm::mat4 model = glm::mat4(1.0f);
   model = glm::rotate(model, (float)glfwGetTime(), glm::vec3(0, 1, 0));
@@ -73,13 +74,12 @@ int main(int argc, char *argv[]) {
   engine::getInstance()->init("Unnamed Engine", 840, 680);
   window = engine::getInstance()->window;
 
-  mesh =
-      Mesh("resources/models/xiao.glb", "resources/textures/texture.jpg");
+  mesh = Mesh("resources/models/xiao.glb", "resources/textures/texture.jpg");
 
   Shader shader = Shader("resources/shaders/min_vertex.glsl",
                          "resources/shaders/min_fragment.glsl");
 
-  entity.addComponent(new RenderableComponent(&mesh, &shader));
+  entity.addComponent(std::make_shared<RenderableComponent>(&mesh, &shader));
 
   engine::getInstance()->loop(update, render);
 }
