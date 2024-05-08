@@ -12,11 +12,9 @@
 #include "unnamedEngine/window.hpp"
 #include <GLFW/glfw3.h>
 #include <glm/fwd.hpp>
-#include <iostream>
 #include <memory>
 
 #define STB_IMAGE_IMPLEMENTATION
-#include "glm/gtc/matrix_transform.hpp"
 #include "stb_image.h"
 
 using namespace std;
@@ -71,10 +69,10 @@ int main(int argc, char *argv[]) {
   engine::getInstance()->init("Unnamed Engine", 840, 680);
   window = engine::getInstance()->window;
 
-  mesh = Mesh("resources/models/suzanne.obj", "resources/textures/texture.jpg");
+  mesh = Mesh("resources/models/cube.dae", "resources/textures/texture.jpg");
 
-  shader = new Shader("resources/shaders/min_vertex.glsl",
-                      "resources/shaders/min_fragment.glsl");
+  shader = new Shader("resources/shaders/vertex.glsl",
+                      "resources/shaders/fragment.glsl");
 
   entity.addComponent(std::make_shared<RenderableComponent>(&mesh, shader));
 

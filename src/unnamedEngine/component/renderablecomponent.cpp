@@ -22,8 +22,6 @@ void RenderableComponent::render() {
   model = glm::rotate(model, parent->rotation.z, glm::vec3(0, 0, 1));
   model = glm::scale(model, parent->scale);
   model = glm::translate(model, parent->position);
-  printf("%f, %f, %f\n", parent->position.x, parent->position.y,
-         parent->position.z);
   shader->setMat4("model", model);
   mesh->render();
 }

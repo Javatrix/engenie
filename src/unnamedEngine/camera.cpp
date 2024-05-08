@@ -17,21 +17,18 @@ void Camera::setFov(float fov) {
 }
 float Camera::getFov() { return fov; }
 void Camera::setNear(float near) {
-  printf("NEAR: %f\n", far);
   if (near > 0) {
     this->near = near;
   }
 }
 float Camera::getNear() { return near; }
 void Camera::setFar(float far) {
-  printf("FAR: %f\n", far);
   if (far > near) {
     this->far = far;
   }
 }
 float Camera::getFar() { return far; }
 void Camera::setNearAndFar(float near, float far) {
-  printf("%f, %f\n", near, far);
   if (near > 0.0f && near < far) {
     this->near = near;
     this->far = far;

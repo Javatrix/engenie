@@ -1,7 +1,7 @@
 #include "unnamedEngine/mesh.hpp"
 
-#include <iostream>
 #include <algorithm>
+#include <iostream>
 #include <vector>
 
 using namespace std;
@@ -49,7 +49,6 @@ Mesh::Mesh(const std::string &modelName, const std::string &textureName) {
       }
     }
 
-    // Populate indices
     for (unsigned int i = 0; i < mesh->mNumFaces; ++i) {
       aiFace face = mesh->mFaces[i];
       for (unsigned int j = 0; j < face.mNumIndices; ++j) {
@@ -60,34 +59,27 @@ Mesh::Mesh(const std::string &modelName, const std::string &textureName) {
       }
     }
   }
-  // Generate OpenGL buffers
+
   glGenVertexArrays(1, &vao);
   glGenBuffers(1, &vbo);
   glGenBuffers(1, &ebo);
 
-  // Bind VAO
   glBindVertexArray(vao);
 
-  // Bind VBO and upload vertex data
   glBindBuffer(GL_ARRAY_BUFFER, vbo);
   glBufferData(GL_ARRAY_BUFFER, vertices.size() * sizeof(Vertex),
                vertices.data(), GL_STATIC_DRAW);
 
-  // Bind EBO and upload index data
   glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ebo);
   glBufferData(GL_ELEMENT_ARRAY_BUFFER, indices.size() * sizeof(unsigned int),
                indices.data(), GL_STATIC_DRAW);
 
-  // Specify vertex attribute pointers
-  glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex),
-                        (void *)0); // Position
+  glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void *)0);
   glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex),
-                        (void *)(offsetof(Vertex, normal))); // Normal
-  glVertexAttribPointer(
-      2, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex),
-      (void *)(offsetof(Vertex, textureCoords))); // Texture coordinates
+                        (void *)(offsetof(Vertex, normal)));
+  glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex),
+                        (void *)(offsetof(Vertex, textureCoords)));
 
-  // Cleanup
   glBindBuffer(GL_ARRAY_BUFFER, 0);
   glBindVertexArray(0);
 
@@ -113,52 +105,4 @@ Mesh::Mesh(const std::string &modelName, const std::string &textureName) {
   glBindVertexArray(0);
   glBindTexture(GL_TEXTURE_2D, 0);
   indexCount = indices.size();
-}
-
-Mesh::Mesh(const vector<float> &vertices, const vector<unsigned int> &indices,
-           string &textureName) {
-  indexCount = indices.size();
-
-  glGenVertexArrays(1, &vao);
-  glGenBuffers(1, &vbo);
-  glGenBuffers(1, &ebo);
-
-  glBindVertexArray(vao);
-
-  glBindBuffer(GL_ARRAY_BUFFER, vbo);
-  glBufferData(GL_ARRAY_BUFFER, vertices.size() * sizeof(float),
-               vertices.data(), GL_STATIC_DRAW);
-
-  glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ebo);
-  glBufferData(GL_ELEMENT_ARRAY_BUFFER, indices.size() * sizeof(unsigned int),
-               indices.data(), GL_STATIC_DRAW);
-
-  glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void *)0);
-  glEnableVertexAttribArray(0);
-  glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float),
-                        (void *)(3 * sizeof(float)));
-  glEnableVertexAttribArray(1);
-  glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(float),
-                        (void *)(5 * sizeof(float)));
-  glEnableVertexAttribArray(2);
-
-  glGenTextures(1, &texture);
-  glBindTexture(GL_TEXTURE_2D, texture);
-  glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-  glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-  glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-  glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-  stbi_set_flip_vertically_on_load(true);
-  int width, height, nrChannels;
-  unsigned char *data =
-      stbi_load(textureName.c_str(), &width, &height, &nrChannels, 0);
-  if (data) {
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB,
-                 GL_UNSIGNED_BYTE, data);
-    glGenerateMipmap(GL_TEXTURE_2D);
-  } else {
-    cout << "Failed to load texture" << endl;
-  }
-
-  stbi_image_free(data);
 }
