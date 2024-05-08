@@ -2,10 +2,7 @@
 #include <memory>
 
 void Entity::update() {
-  lastPosition = position;
-  lastRotation = rotation;
-  lastScale = scale;
-
+  transform.update();
   for (std::shared_ptr<IEntityComponent> component : components) {
     component->updateParent(this);
   }

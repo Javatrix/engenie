@@ -3,21 +3,15 @@
 #include "glm/detail/type_vec.hpp"
 #include "glm/glm.hpp"
 #include "unnamedEngine/component/component.hpp"
+#include "unnamedEngine/math/transform.hpp"
 #include <memory>
 #include <unordered_set>
 
 class World;
 
 class Entity {
-private:
-  World *world;
-  std::unordered_set<std::shared_ptr<IEntityComponent>> components;
-  glm::vec3 lastPosition = glm::vec3(), lastRotation = glm::vec3(),
-            lastScale = glm::vec3();
-
 public:
-  glm::vec3 position = glm::vec3(), rotation = glm::vec3(),
-            scale = glm::vec3(1.0f);
+  Transform transform;
   void update();
   void addComponent(std::shared_ptr<IEntityComponent> component);
   void removeComponent(std::shared_ptr<IEntityComponent> component);
@@ -43,4 +37,8 @@ public:
     }
     return nullptr;
   }
+
+private:
+  World *world;
+  std::unordered_set<std::shared_ptr<IEntityComponent>> components;
 };

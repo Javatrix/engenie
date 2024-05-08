@@ -5,7 +5,7 @@
 #include "unnamedEngine/component/component.hpp"
 #include "unnamedEngine/entity.hpp"
 #include "unnamedEngine/shader.hpp"
-#include <cstdio>
+#include "unnamedEngine/unnamedEngine.hpp"
 
 Entity *parent = nullptr;
 
@@ -17,11 +17,17 @@ void RenderableComponent::render() {
 
   IRenderable::render();
   glm::mat4 model = glm::mat4(1.0f);
-  model = glm::rotate(model, parent->rotation.x, glm::vec3(1, 0, 0));
-  model = glm::rotate(model, parent->rotation.y, glm::vec3(0, 1, 0));
-  model = glm::rotate(model, parent->rotation.z, glm::vec3(0, 0, 1));
-  model = glm::scale(model, parent->scale);
-  model = glm::translate(model, parent->position);
+  float interpolation =
+      unnamed_engine::Engine::getInstance()->getInterpolation();
+  glm::vec3 lerpedRotation =
+      parent->transform.getInterpolatedRotation(interpolation);
+  model = glm::rotate(model, lerpedRotation.x, glm::vec3(1, 0, 0));
+  model = glm::rotate(model, lerpedRotation.y, glm::vec3(0, 1, 0));
+  model = glm::rotate(model, lerpedRotation.z, glm::vec3(0, 0, 1));
+  model =
+      glm::scale(model, parent->transform.getInterpolatedScale(interpolation));
+  model = glm::translate(
+      model, parent->transform.getInterpolatedPosition(interpolation));
   shader->setMat4("model", model);
   mesh->render();
 }

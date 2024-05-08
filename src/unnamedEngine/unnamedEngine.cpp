@@ -2,6 +2,7 @@
 
 #include <algorithm>
 #include <iostream>
+#include <sys/types.h>
 
 void glfwError(int error, const char *description) {
   fprintf(stderr, "GLFW error: %s\n", description);
@@ -10,6 +11,7 @@ void glfwError(int error, const char *description) {
 using namespace unnamed_engine;
 
 Engine *Engine::instance = nullptr;
+float interpolation = 0;
 
 Engine *Engine::getInstance() {
   if (!instance) {
@@ -50,11 +52,12 @@ void Engine::loop(void (*updateHook)(), void (*renderHook)()) {
   double lastUpdate = glfwGetTime(), lastRender = glfwGetTime();
   while (!window.shouldClose()) {
     double currentTime = glfwGetTime();
-    if (currentTime - lastUpdate >= 1.0 / updateRate) {
+    if (currentTime - lastUpdate >= 1.0 / tickRate) {
       update(updateHook);
       lastUpdate = currentTime;
     }
     if (!limitFPS || currentTime - lastRender >= 1.0 / fps) {
+      interpolation = 1.0 / (currentTime - lastUpdate) / tickRate;
       render(renderHook);
       lastRender = currentTime;
     }
@@ -73,6 +76,8 @@ void Engine::render(void (*hook)()) {
   hook();
   window.update();
 }
+
+float Engine::getInterpolation() { return interpolation; }
 
 void Engine::addRenderable(IRenderable *renderable) {
   renderBatch.renderables.insert(renderable);
