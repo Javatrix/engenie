@@ -5,7 +5,7 @@
 
 class Window {
 public:
-  GLFWwindow *HANDLE;
+  GLFWwindow *handle;
   Window() {}
   Window(std::string title, int width, int height);
   void setSize(int width, int height);

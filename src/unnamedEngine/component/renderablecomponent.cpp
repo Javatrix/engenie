@@ -9,7 +9,7 @@
 Entity *parent = nullptr;
 
 RenderableComponent::RenderableComponent(Mesh *mesh, Shader *program)
-    : IRenderable(program), mesh(mesh) {}
+    : IRenderable(program), m_mesh(mesh) {}
 void RenderableComponent::render() {
   if (parent == nullptr)
     return;
@@ -23,7 +23,7 @@ void RenderableComponent::render() {
   model = glm::scale(model, parent->transform.getInterpolatedScale());
   model = glm::translate(model, parent->transform.getInterpolatedPosition());
   shader->setMat4("model", model);
-  mesh->render();
+  m_mesh->render();
 }
 
 void RenderableComponent::updateParent(Entity *entity) { parent = entity; };

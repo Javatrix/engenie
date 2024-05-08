@@ -19,7 +19,7 @@ public:
   typename std::enable_if<std::is_base_of<IEntityComponent, T>::value,
                           bool>::type
   hasComponent() {
-    for (const auto &component : components) {
+    for (const auto &component : m_components) {
       if (dynamic_cast<T *>(component.get()) != nullptr) {
         return true;
       }
@@ -30,7 +30,7 @@ public:
   typename std::enable_if<std::is_base_of<IEntityComponent, T>::value,
                           T *>::type
   getComponent() {
-    for (const auto &component : components) {
+    for (const auto &component : m_components) {
       if (dynamic_cast<T *>(component.get()) != nullptr) {
         return dynamic_cast<T *>(component.get());
       }
@@ -39,6 +39,6 @@ public:
   }
 
 private:
-  World *world;
-  std::unordered_set<std::shared_ptr<IEntityComponent>> components;
+  World *m_world;
+  std::unordered_set<std::shared_ptr<IEntityComponent>> m_components;
 };

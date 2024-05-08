@@ -2,33 +2,33 @@
 #include "unnamedEngine/window.hpp"
 
 Window::Window(std::string title, int width, int height) {
-  HANDLE = glfwCreateWindow(width, height, title.c_str(), NULL, NULL);
-  glfwMakeContextCurrent(HANDLE);
+  handle = glfwCreateWindow(width, height, title.c_str(), NULL, NULL);
+  glfwMakeContextCurrent(handle);
 }
 
 void Window::setSize(int width, int height) {
-  glfwSetWindowSize(HANDLE, width, height);
+  glfwSetWindowSize(handle, width, height);
 }
 
-void Window::setTitle(char *title) { glfwSetWindowTitle(HANDLE, title); }
+void Window::setTitle(char *title) { glfwSetWindowTitle(handle, title); }
 
-const char *Window::getTitle() { return glfwGetWindowTitle(HANDLE); }
+const char *Window::getTitle() { return glfwGetWindowTitle(handle); }
 
 int Window::getWidth() {
   int w;
-  glfwGetWindowSize(HANDLE, &w, nullptr);
+  glfwGetWindowSize(handle, &w, nullptr);
   return w;
 }
 
 int Window::getHeight() {
   int h;
-  glfwGetWindowSize(HANDLE, nullptr, &h);
+  glfwGetWindowSize(handle, nullptr, &h);
   return h;
 }
 
-void Window::close() { glfwSetWindowShouldClose(HANDLE, true); }
+void Window::close() { glfwSetWindowShouldClose(handle, true); }
 
-bool Window::shouldClose() { return glfwWindowShouldClose(HANDLE); }
+bool Window::shouldClose() { return glfwWindowShouldClose(handle); }
 
 void Window::clear() {
   glViewport(0, 0, getWidth(), getHeight());
@@ -37,14 +37,14 @@ void Window::clear() {
 }
 
 void Window::update() {
-  glfwSwapBuffers(HANDLE);
+  glfwSwapBuffers(handle);
   glfwPollEvents();
 }
 
 bool Window::isKeyPressed(int key) {
-  return glfwGetKey(HANDLE, key) == GLFW_PRESS;
+  return glfwGetKey(handle, key) == GLFW_PRESS;
 }
 
 bool Window::isMouseButtonPressed(int button) {
-  return glfwGetMouseButton(HANDLE, button) == GLFW_PRESS;
+  return glfwGetMouseButton(handle, button) == GLFW_PRESS;
 }

@@ -21,5 +21,5 @@ public:
   glm::mat4 getView();
 
 private:
-  float fov, near, far;
+  float m_fov, m_near, m_far;
 };

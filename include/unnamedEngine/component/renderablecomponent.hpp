@@ -7,7 +7,7 @@
 
 class RenderableComponent : public IEntityComponent, public IRenderable {
 private:
-  Mesh *mesh;
+  Mesh *m_mesh;
 
 public:
   RenderableComponent(Mesh *mesh, Shader *program);

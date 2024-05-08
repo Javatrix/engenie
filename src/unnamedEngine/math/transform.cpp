@@ -16,9 +16,9 @@ Transform::Transform(glm::vec3 position)
 Transform::Transform() : Transform(glm::vec3(), glm::vec3(), glm::vec3(1.0f)) {}
 
 void Transform::update() {
-  lastPosition = glm::vec3(position);
-  lastRotation = glm::vec3(rotation);
-  lastScale = glm::vec3(scale);
+  m_lastPosition = glm::vec3(position);
+  m_lastRotation = glm::vec3(rotation);
+  m_lastScale = glm::vec3(scale);
 }
 
 glm::vec3 Transform::getInterpolatedPosition() {
@@ -35,13 +35,13 @@ glm::vec3 Transform::getInterpolatedScale() {
 }
 
 glm::vec3 Transform::getInterpolatedPosition(float interpolation) {
-  return lerp(lastPosition, position, interpolation);
+  return lerp(m_lastPosition, position, interpolation);
 }
 
 glm::vec3 Transform::getInterpolatedRotation(float interpolation) {
-  return lerp(lastRotation, rotation, interpolation);
+  return lerp(m_lastRotation, rotation, interpolation);
 }
 
 glm::vec3 Transform::getInterpolatedScale(float interpolation) {
-  return lerp(lastScale, scale, interpolation);
+  return lerp(m_lastScale, scale, interpolation);
 }

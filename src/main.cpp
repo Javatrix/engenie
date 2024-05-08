@@ -109,7 +109,7 @@ void processInput() {
     angle2 -= 5;
   }
   if (window.isKeyPressed(GLFW_KEY_LEFT_CONTROL)) {
-    glfwSetInputMode(window.HANDLE, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+    glfwSetInputMode(window.handle, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
     camera.transform.rotation.x -=
         (engine::getInstance()->mouseY - engine::getInstance()->lastMouseY) /
         2.0;
@@ -117,6 +117,6 @@ void processInput() {
         (engine::getInstance()->mouseX - engine::getInstance()->lastMouseX) /
         2.0;
   } else {
-    glfwSetInputMode(window.HANDLE, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
+    glfwSetInputMode(window.handle, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
   }
 }

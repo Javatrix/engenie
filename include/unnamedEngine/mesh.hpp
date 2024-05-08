@@ -19,7 +19,7 @@ public:
   void unbind();
 
 private:
-  unsigned int id;
+  unsigned int m_id;
 };
 
 struct Vertex {
@@ -39,15 +39,15 @@ public:
   std::vector<Texture> textures;
   Mesh() {}
   Mesh(const std::string &modelName, const std::string &textureName);
-  Mesh(const std::vector<float> &vertices, const std::vector<unsigned int> &indices,
-       std::string &textureName);
+  Mesh(const std::vector<float> &vertices,
+       const std::vector<unsigned int> &indices, std::string &textureName);
   void render() {
-    glBindVertexArray(vao);
+    glBindVertexArray(m_vao);
     glEnableVertexAttribArray(0);
     glEnableVertexAttribArray(1);
     glEnableVertexAttribArray(2);
     glActiveTexture(GL_TEXTURE0);
-    glBindTexture(GL_TEXTURE_2D, texture);
+    glBindTexture(GL_TEXTURE_2D, m_texture);
     glDrawElements(GL_TRIANGLES, indexCount, GL_UNSIGNED_INT, 0);
     glBindTexture(GL_TEXTURE_2D, 0);
     glDisableVertexAttribArray(0);
@@ -57,6 +57,6 @@ public:
   }
 
 private:
-  unsigned int vao, vbo, ebo;
-  unsigned int texture;
+  unsigned int m_vao, m_vbo, m_ebo;
+  unsigned int m_texture;
 };

@@ -27,7 +27,7 @@ public:
 
 private:
   static Engine *instance;
-  RenderBatch renderBatch;
-  std::vector<void (*)(double mouseX, double mouseY)> listeners;
+  RenderBatch m_renderBatch;
+  std::vector<void (*)(double mouseX, double mouseY)> m_listeners;
 };
 }; // namespace unnamed_engine

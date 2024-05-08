@@ -34,14 +34,14 @@ void Engine::init(const std::string &windowTitle, int windowWidth,
   glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
   window = Window(windowTitle, windowWidth, windowHeight);
-  if (!window.HANDLE) {
+  if (!window.handle) {
     std::cout << "Window creation failed." << std::endl;
     return;
   }
 
-  glfwSetCursorPosCallback(window.HANDLE, mouseInput);
+  glfwSetCursorPosCallback(window.handle, mouseInput);
 
-  glfwMakeContextCurrent(window.HANDLE);
+  glfwMakeContextCurrent(window.handle);
   if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress)) {
     std::cout << "Failed to initialize GLAD" << std::endl;
     return;
@@ -73,31 +73,31 @@ void Engine::update(void (*hook)()) {
 void Engine::render(void (*hook)()) {
   window.clear();
   hook();
-  renderBatch.render();
+  m_renderBatch.render();
   window.update();
 }
 
 float Engine::getInterpolation() { return interpolation; }
 
 void Engine::addRenderable(IRenderable *renderable) {
-  renderBatch.renderables.insert(renderable);
+  m_renderBatch.renderables.insert(renderable);
 }
 
 void Engine::removeRenderable(IRenderable *renderable) {
-  renderBatch.renderables.erase(renderable);
+  m_renderBatch.renderables.erase(renderable);
 }
 
 void Engine::addMouseListener(void (*listener)(double mouseX, double mouseY)) {
-  listeners.push_back(listener);
+  m_listeners.push_back(listener);
 }
 
 void Engine::removeMouseListener(void (*listener)(double mouseX,
                                                   double mouseY)) {
-  listeners.erase(
-      std::remove_if(listeners.begin(), listeners.end(),
+  m_listeners.erase(
+      std::remove_if(m_listeners.begin(), m_listeners.end(),
                      [&](void (*f)(double, double)) { return f == listener; }),
 
-      listeners.end());
+      m_listeners.end());
 }
 
 void Engine::mouseInput(GLFWwindow *window, double xpos, double ypos) {
@@ -106,7 +106,7 @@ void Engine::mouseInput(GLFWwindow *window, double xpos, double ypos) {
   }
   getInstance()->mouseX = xpos;
   getInstance()->mouseY = ypos;
-  for (auto listener : getInstance()->listeners) {
+  for (auto listener : getInstance()->m_listeners) {
     listener(xpos, ypos);
   }
 }

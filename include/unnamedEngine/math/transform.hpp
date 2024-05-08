@@ -20,6 +20,7 @@ public:
   glm::vec3 getInterpolatedScale(float interpolation);
 
 private:
-  glm::vec3 lastPosition = glm::vec3(position),
-            lastRotation = glm::vec3(rotation), lastScale = glm::vec3(scale);
+  glm::vec3 m_lastPosition = glm::vec3(position),
+            m_lastRotation = glm::vec3(rotation),
+            m_lastScale = glm::vec3(scale);
 };

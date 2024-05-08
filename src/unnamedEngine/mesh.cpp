@@ -6,7 +6,7 @@
 
 using namespace std;
 
-void Texture::bind() { glBindTexture(GL_TEXTURE_2D, id); }
+void Texture::bind() { glBindTexture(GL_TEXTURE_2D, m_id); }
 
 void Texture::unbind() { glBindTexture(GL_TEXTURE_2D, 0); }
 
@@ -60,17 +60,17 @@ Mesh::Mesh(const std::string &modelName, const std::string &textureName) {
     }
   }
 
-  glGenVertexArrays(1, &vao);
-  glGenBuffers(1, &vbo);
-  glGenBuffers(1, &ebo);
+  glGenVertexArrays(1, &m_vao);
+  glGenBuffers(1, &m_vbo);
+  glGenBuffers(1, &m_ebo);
 
-  glBindVertexArray(vao);
+  glBindVertexArray(m_vao);
 
-  glBindBuffer(GL_ARRAY_BUFFER, vbo);
+  glBindBuffer(GL_ARRAY_BUFFER, m_vbo);
   glBufferData(GL_ARRAY_BUFFER, vertices.size() * sizeof(Vertex),
                vertices.data(), GL_STATIC_DRAW);
 
-  glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ebo);
+  glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_ebo);
   glBufferData(GL_ELEMENT_ARRAY_BUFFER, indices.size() * sizeof(unsigned int),
                indices.data(), GL_STATIC_DRAW);
 
@@ -83,8 +83,8 @@ Mesh::Mesh(const std::string &modelName, const std::string &textureName) {
   glBindBuffer(GL_ARRAY_BUFFER, 0);
   glBindVertexArray(0);
 
-  glGenTextures(1, &texture);
-  glBindTexture(GL_TEXTURE_2D, texture);
+  glGenTextures(1, &m_texture);
+  glBindTexture(GL_TEXTURE_2D, m_texture);
   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
