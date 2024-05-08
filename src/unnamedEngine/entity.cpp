@@ -7,7 +7,7 @@ void Entity::update() {
   lastScale = scale;
 
   for (std::shared_ptr<IEntityComponent> component : components) {
-    component->updateParent(*this);
+    component->updateParent(this);
   }
 }
 

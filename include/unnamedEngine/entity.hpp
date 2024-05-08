@@ -1,8 +1,8 @@
 #pragma once
 
+#include "glm/detail/type_vec.hpp"
 #include "glm/glm.hpp"
 #include "unnamedEngine/component/component.hpp"
-#include <algorithm>
 #include <memory>
 #include <unordered_set>
 
@@ -12,10 +12,12 @@ class Entity {
 private:
   World *world;
   std::unordered_set<std::shared_ptr<IEntityComponent>> components;
-  glm::vec3 lastPosition, lastRotation, lastScale;
+  glm::vec3 lastPosition = glm::vec3(), lastRotation = glm::vec3(),
+            lastScale = glm::vec3();
 
 public:
-  glm::vec3 position, rotation, scale;
+  glm::vec3 position = glm::vec3(), rotation = glm::vec3(),
+            scale = glm::vec3(1.0f);
   void update();
   void addComponent(std::shared_ptr<IEntityComponent> component);
   void removeComponent(std::shared_ptr<IEntityComponent> component);

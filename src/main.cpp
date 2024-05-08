@@ -1,5 +1,3 @@
-#include "glad/glad.h"
-
 #include "glm/detail/func_trigonometric.hpp"
 #include "glm/detail/type_mat.hpp"
 #include "glm/detail/type_vec.hpp"
@@ -16,11 +14,9 @@
 #include <glm/fwd.hpp>
 #include <iostream>
 #include <memory>
-#include <ostream>
 
 #define STB_IMAGE_IMPLEMENTATION
 #include "glm/gtc/matrix_transform.hpp"
-#include "glm/gtc/type_ptr.hpp"
 #include "stb_image.h"
 
 using namespace std;
@@ -34,14 +30,18 @@ Camera camera(glm::vec3(0, 0, 0), 45);
 glm::vec3 diffuseDir(0, -1, 0.5);
 glm::vec4 diffuseColor(1, 0.9, 0.9, 1);
 
-void update() { processInput(); }
-
 float angle = 45, angle2;
 Mesh mesh;
 
 Material mat(glm::vec3(0.1, 0.8, 1), glm::vec3(1, 0.8, 0.1), 0.4, 64);
 
 Entity entity;
+Shader *shader;
+
+void update() {
+  processInput();
+  entity.update();
+}
 
 void render() {
   Shader *shader = entity.getComponent<RenderableComponent>()->shader;
@@ -64,9 +64,6 @@ void render() {
   glm::mat4 view = camera.getView();
   shader->setMat4("view", view);
 
-  glm::mat4 model = glm::mat4(1.0f);
-  model = glm::rotate(model, (float)glfwGetTime(), glm::vec3(0, 1, 0));
-  shader->setMat4("model", model);
   entity.getComponent<RenderableComponent>()->render();
 }
 
@@ -74,12 +71,12 @@ int main(int argc, char *argv[]) {
   engine::getInstance()->init("Unnamed Engine", 840, 680);
   window = engine::getInstance()->window;
 
-  mesh = Mesh("resources/models/xiao.glb", "resources/textures/texture.jpg");
+  mesh = Mesh("resources/models/suzanne.obj", "resources/textures/texture.jpg");
 
-  Shader shader = Shader("resources/shaders/min_vertex.glsl",
-                         "resources/shaders/min_fragment.glsl");
+  shader = new Shader("resources/shaders/min_vertex.glsl",
+                      "resources/shaders/min_fragment.glsl");
 
-  entity.addComponent(std::make_shared<RenderableComponent>(&mesh, &shader));
+  entity.addComponent(std::make_shared<RenderableComponent>(&mesh, shader));
 
   engine::getInstance()->loop(update, render);
 }
@@ -117,9 +114,15 @@ void processInput() {
   } else if (window.isKeyPressed(GLFW_KEY_DOWN)) {
     angle2 -= 5;
   }
-  glfwSetInputMode(window.HANDLE, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
-  camera.rotation.x -=
-      (engine::getInstance()->mouseY - engine::getInstance()->lastMouseY) / 2.0;
-  camera.rotation.y +=
-      (engine::getInstance()->mouseX - engine::getInstance()->lastMouseX) / 2.0;
+  if (window.isKeyPressed(GLFW_KEY_LEFT_CONTROL)) {
+    glfwSetInputMode(window.HANDLE, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+    camera.rotation.x -=
+        (engine::getInstance()->mouseY - engine::getInstance()->lastMouseY) /
+        2.0;
+    camera.rotation.y +=
+        (engine::getInstance()->mouseX - engine::getInstance()->lastMouseX) /
+        2.0;
+  } else {
+    glfwSetInputMode(window.HANDLE, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
+  }
 }
