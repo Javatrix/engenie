@@ -1,6 +1,5 @@
 #pragma once
 
-#include "glm/detail/type_vec.hpp"
 #include "glm/glm.hpp"
 #include "unnamedEngine/component/component.hpp"
 #include "unnamedEngine/math/transform.hpp"

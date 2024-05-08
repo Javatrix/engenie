@@ -6,11 +6,11 @@
 #include "unnamedEngine/shader.hpp"
 
 class RenderableComponent : public IEntityComponent, public IRenderable {
-private:
-  Mesh *m_mesh;
-
 public:
   RenderableComponent(Mesh *mesh, Shader *program);
   void render() override;
   void updateParent(Entity *parent) override;
+
+private:
+  Mesh *m_mesh;
 };
