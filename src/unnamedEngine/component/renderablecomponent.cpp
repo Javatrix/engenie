@@ -5,7 +5,6 @@
 #include "unnamedEngine/component/component.hpp"
 #include "unnamedEngine/entity.hpp"
 #include "unnamedEngine/shader.hpp"
-#include "unnamedEngine/unnamedEngine.hpp"
 
 Entity *parent = nullptr;
 
@@ -26,4 +25,5 @@ void RenderableComponent::render() {
   shader->setMat4("model", model);
   mesh->render();
 }
+
 void RenderableComponent::updateParent(Entity *entity) { parent = entity; };

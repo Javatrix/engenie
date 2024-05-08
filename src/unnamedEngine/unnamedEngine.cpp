@@ -57,7 +57,7 @@ void Engine::loop(void (*updateHook)(), void (*renderHook)()) {
       lastUpdate = currentTime;
     }
     if (!limitFPS || currentTime - lastRender >= 1.0 / fps) {
-      interpolation = 1.0 / (currentTime - lastUpdate) / tickRate;
+      interpolation = (currentTime - lastUpdate) / (1.0 / tickRate);
       render(renderHook);
       lastRender = currentTime;
     }
@@ -72,8 +72,8 @@ void Engine::update(void (*hook)()) {
 
 void Engine::render(void (*hook)()) {
   window.clear();
-  renderBatch.render();
   hook();
+  renderBatch.render();
   window.update();
 }
 

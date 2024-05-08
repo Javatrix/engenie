@@ -7,7 +7,7 @@
 
 class Camera : public Entity {
 public:
-  glm::vec3 position, rotation, direction, right;
+  glm::vec3 direction, right;
   Camera(glm::vec3 position, float fov);
   Camera(glm::vec3 position, float fov, float near, float far);
   void setFov(float fov);

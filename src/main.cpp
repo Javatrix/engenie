@@ -37,8 +37,10 @@ Entity entity;
 Shader *shader;
 
 void update() {
-  processInput();
+  unnamed_engine::Engine::getInstance()->tickRate = 2;
+  camera.update();
   entity.update();
+  processInput();
 }
 
 void render() {
@@ -50,19 +52,13 @@ void render() {
   shader->setFloat("ambientStrength", 0.2);
   shader->setVec3("diffuseDir", diffuseDir);
   shader->setVec4("diffuseColor", diffuseColor);
-  shader->setVec3("viewPos", camera.position);
+  shader->setVec3("viewPos", camera.transform.getInterpolatedPosition());
   shader->setFloat("specularity", 0.4);
   shader->setFloat("shininess", 256);
   shader->setMaterial("material", mat);
-
-  glm::mat4 projection =
-      camera.getProjection(window.getWidth(), window.getHeight());
-  shader->setMat4("projection", projection);
-
-  glm::mat4 view = camera.getView();
-  shader->setMat4("view", view);
-
-  entity.getComponent<RenderableComponent>()->render();
+  shader->setMat4("projection",
+                  camera.getProjection(window.getWidth(), window.getHeight()));
+  shader->setMat4("view", camera.getView());
 }
 
 int main(int argc, char *argv[]) {
@@ -85,22 +81,22 @@ void processInput() {
   }
   float speed = 0.5f;
   if (window.isKeyPressed(GLFW_KEY_W)) {
-    camera.position += speed * camera.direction;
+    camera.transform.position += speed * camera.direction;
   }
   if (window.isKeyPressed(GLFW_KEY_S)) {
-    camera.position -= speed * camera.direction;
+    camera.transform.position -= speed * camera.direction;
   }
   if (window.isKeyPressed(GLFW_KEY_A)) {
-    camera.position -= speed * camera.right;
+    camera.transform.position -= speed * camera.right;
   }
   if (window.isKeyPressed(GLFW_KEY_D)) {
-    camera.position += speed * camera.right;
+    camera.transform.position += speed * camera.right;
   }
   if (window.isKeyPressed(GLFW_KEY_SPACE)) {
-    camera.position.y += speed;
+    camera.transform.position.y += speed;
   }
   if (window.isKeyPressed(GLFW_KEY_LEFT_SHIFT)) {
-    camera.position.y -= speed;
+    camera.transform.position.y -= speed;
   }
   if (window.isKeyPressed(GLFW_KEY_RIGHT)) {
     angle += 5;
@@ -114,10 +110,10 @@ void processInput() {
   }
   if (window.isKeyPressed(GLFW_KEY_LEFT_CONTROL)) {
     glfwSetInputMode(window.HANDLE, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
-    camera.rotation.x -=
+    camera.transform.rotation.x -=
         (engine::getInstance()->mouseY - engine::getInstance()->lastMouseY) /
         2.0;
-    camera.rotation.y +=
+    camera.transform.rotation.y +=
         (engine::getInstance()->mouseX - engine::getInstance()->lastMouseX) /
         2.0;
   } else {

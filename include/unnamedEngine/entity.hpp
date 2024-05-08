@@ -12,7 +12,7 @@ class World;
 class Entity {
 public:
   Transform transform;
-  void update();
+  virtual void update();
   void addComponent(std::shared_ptr<IEntityComponent> component);
   void removeComponent(std::shared_ptr<IEntityComponent> component);
   template <typename T>

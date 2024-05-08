@@ -6,5 +6,5 @@ class IRenderable {
 public:
   Shader *shader;
   IRenderable(Shader *shader);
-  void render();
+  virtual void render();
 };

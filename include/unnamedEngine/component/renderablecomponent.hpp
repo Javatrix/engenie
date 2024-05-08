@@ -11,6 +11,6 @@ private:
 
 public:
   RenderableComponent(Mesh *mesh, Shader *program);
-  void render();
-  void updateParent(Entity *entity);
+  void render() override;
+  void updateParent(Entity *parent) override;
 };
