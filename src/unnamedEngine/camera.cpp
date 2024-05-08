@@ -1,7 +1,6 @@
 #include "unnamedEngine/camera.hpp"
 #include "glm/detail/type_vec.hpp"
 #include "glm/gtc/matrix_transform.hpp"
-#include <cstdio>
 
 Camera::Camera(glm::vec3 position, float fov)
     : Camera(position, fov, 0.001f, 10000) {}

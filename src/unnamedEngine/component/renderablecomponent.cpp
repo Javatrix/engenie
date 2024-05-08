@@ -17,17 +17,12 @@ void RenderableComponent::render() {
 
   IRenderable::render();
   glm::mat4 model = glm::mat4(1.0f);
-  float interpolation =
-      unnamed_engine::Engine::getInstance()->getInterpolation();
-  glm::vec3 lerpedRotation =
-      parent->transform.getInterpolatedRotation(interpolation);
+  glm::vec3 lerpedRotation = parent->transform.getInterpolatedRotation();
   model = glm::rotate(model, lerpedRotation.x, glm::vec3(1, 0, 0));
   model = glm::rotate(model, lerpedRotation.y, glm::vec3(0, 1, 0));
   model = glm::rotate(model, lerpedRotation.z, glm::vec3(0, 0, 1));
-  model =
-      glm::scale(model, parent->transform.getInterpolatedScale(interpolation));
-  model = glm::translate(
-      model, parent->transform.getInterpolatedPosition(interpolation));
+  model = glm::scale(model, parent->transform.getInterpolatedScale());
+  model = glm::translate(model, parent->transform.getInterpolatedPosition());
   shader->setMat4("model", model);
   mesh->render();
 }

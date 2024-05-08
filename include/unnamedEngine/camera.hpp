@@ -2,8 +2,10 @@
 
 #include "glm/detail/type_vec.hpp"
 #include "glm/glm.hpp"
+#include "unnamedEngine/component/component.hpp"
+#include "unnamedEngine/entity.hpp"
 
-class Camera {
+class Camera : public Entity {
 public:
   glm::vec3 position, rotation, direction, right;
   Camera(glm::vec3 position, float fov);
