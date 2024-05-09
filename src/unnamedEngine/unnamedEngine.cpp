@@ -81,14 +81,6 @@ void Engine::render() {
 
 float Engine::getInterpolation() { return interpolation; }
 
-void Engine::addRenderable(IRenderable *renderable) {
-  m_renderBatch.renderables.insert(renderable);
-}
-
-void Engine::removeRenderable(IRenderable *renderable) {
-  m_renderBatch.renderables.erase(renderable);
-}
-
 void Engine::mouseInput(GLFWwindow *window, double xpos, double ypos) {
   if (!getInstance()) {
     return;

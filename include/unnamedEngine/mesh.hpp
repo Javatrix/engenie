@@ -4,8 +4,6 @@
 #include "glm/detail/type_vec.hpp"
 #include "glm/glm.hpp"
 #include "stb_image.h"
-#include <GL/gl.h>
-#include <GLFW/glfw3.h>
 #include <assimp/Importer.hpp>
 #include <assimp/mesh.h>
 #include <assimp/postprocess.h>

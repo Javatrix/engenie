@@ -8,13 +8,14 @@
 
 Entity *parent = nullptr;
 
-RenderableComponent::RenderableComponent(Mesh *mesh, Shader *program)
-    : IRenderable(program), m_mesh(mesh) {}
+RenderableComponent::RenderableComponent(Mesh &mesh, Shader &program)
+    : m_mesh(mesh), shader(program) {}
 void RenderableComponent::render() {
   if (parent == nullptr)
     return;
 
-  IRenderable::render();
+  shader.use();
+
   glm::mat4 model = glm::mat4(1.0f);
   glm::vec3 lerpedRotation = parent->transform.getInterpolatedRotation();
   model = glm::rotate(model, lerpedRotation.x, glm::vec3(1, 0, 0));
@@ -22,8 +23,8 @@ void RenderableComponent::render() {
   model = glm::rotate(model, lerpedRotation.z, glm::vec3(0, 0, 1));
   model = glm::scale(model, parent->transform.getInterpolatedScale());
   model = glm::translate(model, parent->transform.getInterpolatedPosition());
-  shader->setMat4("model", model);
-  m_mesh->render();
+  shader.setMat4("model", model);
+  m_mesh.render();
 }
 
 void RenderableComponent::updateParent(Entity *entity) { parent = entity; };

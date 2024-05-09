@@ -1,9 +1,9 @@
 #pragma once
-#include "unnamedEngine/material.hpp"
-
-#include <glad/glad.h>
+#include "glad/glad.h"
 #include <glm/glm.hpp>
 #include <string>
+
+#include "unnamedEngine/material.hpp"
 
 class Shader {
 public:

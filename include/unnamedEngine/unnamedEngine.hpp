@@ -1,7 +1,6 @@
 #pragma once
 
 #include "unnamedEngine/layer/layerstack.hpp"
-#include "unnamedEngine/rendering/renderbatch.hpp"
 #include "unnamedEngine/window.hpp"
 
 namespace unnamed_engine {
@@ -17,8 +16,6 @@ public:
   void init(const std::string &windowTitle, int windowWidth, int windowHeight);
   void run();
   float getInterpolation();
-  void addRenderable(IRenderable *renderable);
-  void removeRenderable(IRenderable *renderable);
   LayerStack &getLayerStack() { return m_layerStack; }
 
 private:
@@ -26,7 +23,6 @@ private:
   static void mouseInput(GLFWwindow *window, double xpos, double ypos);
   void update();
   void render();
-  RenderBatch m_renderBatch;
   LayerStack m_layerStack;
 };
 }; // namespace unnamed_engine
