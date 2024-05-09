@@ -1,6 +1,6 @@
 #include "unnamedEngine/unnamedEngine.hpp"
+#include "unnamedEngine/layer/layer.hpp"
 
-#include <algorithm>
 #include <iostream>
 #include <sys/types.h>
 
@@ -87,17 +87,16 @@ void Engine::removeRenderable(IRenderable *renderable) {
   m_renderBatch.renderables.erase(renderable);
 }
 
-void Engine::addMouseListener(void (*listener)(double mouseX, double mouseY)) {
-  m_listeners.push_back(listener);
+void Engine::pushLayer(Layer &layer) {
+  m_layerStack.push(layer);
+  layer.attach();
 }
 
-void Engine::removeMouseListener(void (*listener)(double mouseX,
-                                                  double mouseY)) {
-  m_listeners.erase(
-      std::remove_if(m_listeners.begin(), m_listeners.end(),
-                     [&](void (*f)(double, double)) { return f == listener; }),
-
-      m_listeners.end());
+Layer Engine::popLayer() {
+  Layer layer = m_layerStack.top();
+  m_layerStack.pop();
+  layer.detach();
+  return layer;
 }
 
 void Engine::mouseInput(GLFWwindow *window, double xpos, double ypos) {
@@ -106,7 +105,4 @@ void Engine::mouseInput(GLFWwindow *window, double xpos, double ypos) {
   }
   getInstance()->mouseX = xpos;
   getInstance()->mouseY = ypos;
-  for (auto listener : getInstance()->m_listeners) {
-    listener(xpos, ypos);
-  }
 }

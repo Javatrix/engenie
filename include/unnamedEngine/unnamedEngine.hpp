@@ -1,8 +1,9 @@
 #pragma once
 
+#include "unnamedEngine/layer/layer.hpp"
 #include "unnamedEngine/rendering/renderbatch.hpp"
 #include "unnamedEngine/window.hpp"
-#include <vector>
+#include <stack>
 
 namespace unnamed_engine {
 
@@ -21,13 +22,13 @@ public:
   float getInterpolation();
   void addRenderable(IRenderable *renderable);
   void removeRenderable(IRenderable *renderable);
-  void addMouseListener(void (*listener)(double mouseX, double mouseY));
-  void removeMouseListener(void (*listener)(double mouseX, double mouseY));
-  static void mouseInput(GLFWwindow *window, double xpos, double ypos);
+  void pushLayer(Layer &layer);
+  Layer popLayer();
 
 private:
   static Engine *instance;
+  static void mouseInput(GLFWwindow *window, double xpos, double ypos);
   RenderBatch m_renderBatch;
-  std::vector<void (*)(double mouseX, double mouseY)> m_listeners;
+  std::stack<Layer> m_layerStack;
 };
 }; // namespace unnamed_engine
