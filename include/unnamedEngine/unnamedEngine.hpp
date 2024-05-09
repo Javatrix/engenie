@@ -1,9 +1,9 @@
 #pragma once
 
 #include "unnamedEngine/layer/layer.hpp"
+#include "unnamedEngine/layer/layerstack.hpp"
 #include "unnamedEngine/rendering/renderbatch.hpp"
 #include "unnamedEngine/window.hpp"
-#include <stack>
 
 namespace unnamed_engine {
 
@@ -22,13 +22,12 @@ public:
   float getInterpolation();
   void addRenderable(IRenderable *renderable);
   void removeRenderable(IRenderable *renderable);
-  void pushLayer(Layer &layer);
-  Layer popLayer();
+  LayerStack &getLayerStack() { return m_layerStack; }
 
 private:
   static Engine *instance;
   static void mouseInput(GLFWwindow *window, double xpos, double ypos);
   RenderBatch m_renderBatch;
-  std::stack<Layer> m_layerStack;
+  LayerStack m_layerStack;
 };
 }; // namespace unnamed_engine

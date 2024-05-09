@@ -1,5 +1,4 @@
 #include "glm/detail/func_trigonometric.hpp"
-#include "glm/detail/type_mat.hpp"
 #include "glm/detail/type_vec.hpp"
 #include "unnamedEngine/camera.hpp"
 #include "unnamedEngine/component/component.hpp"
@@ -37,7 +36,6 @@ Entity entity;
 Shader *shader;
 
 void update() {
-  unnamed_engine::Engine::getInstance()->tickRate = 2;
   camera.update();
   entity.update();
   processInput();

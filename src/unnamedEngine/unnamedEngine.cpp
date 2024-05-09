@@ -1,5 +1,4 @@
 #include "unnamedEngine/unnamedEngine.hpp"
-#include "unnamedEngine/layer/layer.hpp"
 
 #include <iostream>
 #include <sys/types.h>
@@ -65,7 +64,6 @@ void Engine::loop(void (*updateHook)(), void (*renderHook)()) {
 }
 
 void Engine::update(void (*hook)()) {
-  hook();
   lastMouseX = mouseX;
   lastMouseY = mouseY;
 }
@@ -85,18 +83,6 @@ void Engine::addRenderable(IRenderable *renderable) {
 
 void Engine::removeRenderable(IRenderable *renderable) {
   m_renderBatch.renderables.erase(renderable);
-}
-
-void Engine::pushLayer(Layer &layer) {
-  m_layerStack.push(layer);
-  layer.attach();
-}
-
-Layer Engine::popLayer() {
-  Layer layer = m_layerStack.top();
-  m_layerStack.pop();
-  layer.detach();
-  return layer;
 }
 
 void Engine::mouseInput(GLFWwindow *window, double xpos, double ypos) {
