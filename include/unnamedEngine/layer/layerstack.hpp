@@ -5,6 +5,7 @@
 class LayerStack {
 public:
   LayerStack();
+  ~LayerStack();
   void pushLayer(Layer *layer);
   void popLayer(Layer *layer);
   void pushOverlay(Layer *overlay);

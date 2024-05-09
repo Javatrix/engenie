@@ -11,6 +11,7 @@
 #include "unnamedEngine/window.hpp"
 #include <GLFW/glfw3.h>
 #include <glm/fwd.hpp>
+#include <iostream>
 #include <memory>
 
 #define STB_IMAGE_IMPLEMENTATION
@@ -34,6 +35,13 @@ Material mat(glm::vec3(0.1, 0.8, 1), glm::vec3(1, 0.8, 0.1), 0.4, 64);
 
 Entity entity;
 Shader *shader;
+
+class TestLayer : public Layer {
+  void attach() override { cout << "Attached " << getName() << '!' << endl; }
+  void detach() override { cout << "Detached!" << endl; }
+  void update() override { cout << "Updating!" << endl; }
+  void render() override { cout << "Rendering!" << endl; }
+};
 
 void update() {
   camera.update();
@@ -69,6 +77,9 @@ int main(int argc, char *argv[]) {
                       "resources/shaders/fragment.glsl");
 
   entity.addComponent(std::make_shared<RenderableComponent>(&mesh, shader));
+
+  TestLayer *testLayer = new TestLayer();
+  engine::getInstance()->getLayerStack().pushLayer(testLayer);
 
   engine::getInstance()->loop(update, render);
 }

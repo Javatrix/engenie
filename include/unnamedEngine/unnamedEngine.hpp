@@ -1,6 +1,5 @@
 #pragma once
 
-#include "unnamedEngine/layer/layer.hpp"
 #include "unnamedEngine/layer/layerstack.hpp"
 #include "unnamedEngine/rendering/renderbatch.hpp"
 #include "unnamedEngine/window.hpp"
@@ -17,8 +16,6 @@ public:
   static Engine *getInstance();
   void init(const std::string &windowTitle, int windowWidth, int windowHeight);
   void loop(void (*updateHook)(), void (*renderHook)());
-  void update(void (*hook)());
-  void render(void (*hook)());
   float getInterpolation();
   void addRenderable(IRenderable *renderable);
   void removeRenderable(IRenderable *renderable);
@@ -27,6 +24,8 @@ public:
 private:
   static Engine *instance;
   static void mouseInput(GLFWwindow *window, double xpos, double ypos);
+  void update();
+  void render();
   RenderBatch m_renderBatch;
   LayerStack m_layerStack;
 };

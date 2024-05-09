@@ -5,7 +5,7 @@
 
 class Layer {
 public:
-  Layer(const std::string &name = "Layer");
+  Layer(const std::string &name = "Layer") : m_debugName(name) {}
   virtual void render() {}
   virtual void update() {}
   virtual void attach() {}

@@ -1,4 +1,5 @@
 #include "unnamedEngine/unnamedEngine.hpp"
+#include "unnamedEngine/layer/layer.hpp"
 
 #include <iostream>
 #include <sys/types.h>
@@ -11,7 +12,6 @@ using namespace unnamed_engine;
 
 Engine *Engine::instance = nullptr;
 float interpolation = 0;
-
 Engine *Engine::getInstance() {
   if (!instance) {
     instance = new Engine();
@@ -52,26 +52,30 @@ void Engine::loop(void (*updateHook)(), void (*renderHook)()) {
   while (!window.shouldClose()) {
     double currentTime = glfwGetTime();
     if (currentTime - lastUpdate >= 1.0 / tickRate) {
-      update(updateHook);
+      update();
       lastUpdate = currentTime;
     }
     if (!limitFPS || currentTime - lastRender >= 1.0 / fps) {
       interpolation = (currentTime - lastUpdate) / (1.0 / tickRate);
-      render(renderHook);
+      render();
       lastRender = currentTime;
     }
   }
 }
 
-void Engine::update(void (*hook)()) {
+void Engine::update() {
+  for (Layer *layer : m_layerStack) {
+    layer->update();
+  }
   lastMouseX = mouseX;
   lastMouseY = mouseY;
 }
 
-void Engine::render(void (*hook)()) {
+void Engine::render() {
   window.clear();
-  hook();
-  m_renderBatch.render();
+  for (Layer *layer : m_layerStack) {
+    layer->render();
+  }
   window.update();
 }
 
