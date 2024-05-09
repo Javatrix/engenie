@@ -15,7 +15,7 @@ public:
   Engine() {}
   static Engine *getInstance();
   void init(const std::string &windowTitle, int windowWidth, int windowHeight);
-  void loop(void (*updateHook)(), void (*renderHook)());
+  void run();
   float getInterpolation();
   void addRenderable(IRenderable *renderable);
   void removeRenderable(IRenderable *renderable);

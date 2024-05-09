@@ -47,7 +47,7 @@ void Engine::init(const std::string &windowTitle, int windowWidth,
   }
 }
 
-void Engine::loop(void (*updateHook)(), void (*renderHook)()) {
+void Engine::run() {
   double lastUpdate = glfwGetTime(), lastRender = glfwGetTime();
   while (!window.shouldClose()) {
     double currentTime = glfwGetTime();

@@ -4,6 +4,7 @@
 #include "unnamedEngine/component/component.hpp"
 #include "unnamedEngine/component/renderablecomponent.hpp"
 #include "unnamedEngine/entity.hpp"
+#include "unnamedEngine/layer/layer.hpp"
 #include "unnamedEngine/material.hpp"
 #include "unnamedEngine/mesh.hpp"
 #include "unnamedEngine/shader.hpp"
@@ -11,7 +12,6 @@
 #include "unnamedEngine/window.hpp"
 #include <GLFW/glfw3.h>
 #include <glm/fwd.hpp>
-#include <iostream>
 #include <memory>
 
 #define STB_IMAGE_IMPLEMENTATION
@@ -36,36 +36,31 @@ Material mat(glm::vec3(0.1, 0.8, 1), glm::vec3(1, 0.8, 0.1), 0.4, 64);
 Entity entity;
 Shader *shader;
 
-class TestLayer : public Layer {
-  void attach() override { cout << "Attached " << getName() << '!' << endl; }
-  void detach() override { cout << "Detached!" << endl; }
-  void update() override { cout << "Updating!" << endl; }
-  void render() override { cout << "Rendering!" << endl; }
+class OurGameLayer : public Layer {
+  void render() override {
+    Shader *shader = entity.getComponent<RenderableComponent>()->shader;
+
+    diffuseDir.y = glm::cos(glm::radians(angle));
+    diffuseDir.x = glm::sin(glm::radians(angle));
+    diffuseDir.z = glm::sin(glm::radians(angle2));
+    shader->setFloat("ambientStrength", 0.2);
+    shader->setVec3("diffuseDir", diffuseDir);
+    shader->setVec4("diffuseColor", diffuseColor);
+    shader->setVec3("viewPos", camera.transform.getInterpolatedPosition());
+    shader->setFloat("specularity", 0.4);
+    shader->setFloat("shininess", 256);
+    shader->setMaterial("material", mat);
+    shader->setMat4("projection", camera.getProjection(window.getWidth(),
+                                                       window.getHeight()));
+    shader->setMat4("view", camera.getView());
+    entity.getComponent<RenderableComponent>()->render();
+  }
+  void update() override {
+    camera.update();
+    entity.update();
+    processInput();
+  }
 };
-
-void update() {
-  camera.update();
-  entity.update();
-  processInput();
-}
-
-void render() {
-  Shader *shader = entity.getComponent<RenderableComponent>()->shader;
-
-  diffuseDir.y = glm::cos(glm::radians(angle));
-  diffuseDir.x = glm::sin(glm::radians(angle));
-  diffuseDir.z = glm::sin(glm::radians(angle2));
-  shader->setFloat("ambientStrength", 0.2);
-  shader->setVec3("diffuseDir", diffuseDir);
-  shader->setVec4("diffuseColor", diffuseColor);
-  shader->setVec3("viewPos", camera.transform.getInterpolatedPosition());
-  shader->setFloat("specularity", 0.4);
-  shader->setFloat("shininess", 256);
-  shader->setMaterial("material", mat);
-  shader->setMat4("projection",
-                  camera.getProjection(window.getWidth(), window.getHeight()));
-  shader->setMat4("view", camera.getView());
-}
 
 int main(int argc, char *argv[]) {
   engine::getInstance()->init("Unnamed Engine", 840, 680);
@@ -78,10 +73,9 @@ int main(int argc, char *argv[]) {
 
   entity.addComponent(std::make_shared<RenderableComponent>(&mesh, shader));
 
-  TestLayer *testLayer = new TestLayer();
-  engine::getInstance()->getLayerStack().pushLayer(testLayer);
-
-  engine::getInstance()->loop(update, render);
+  Layer *mainLayer = new OurGameLayer();
+  engine::getInstance()->getLayerStack().pushLayer(mainLayer);
+  engine::getInstance()->run();
 }
 
 void processInput() {
