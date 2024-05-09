@@ -2,9 +2,9 @@
 
 class Event {
 public:
-  void handle() { handled = true; }
-  bool isHandled() { return handled; }
+  void markHandled() { m_handled = true; }
+  bool isHandled() { return m_handled; }
 
 private:
-  bool handled;
-}
+  bool m_handled;
+};
