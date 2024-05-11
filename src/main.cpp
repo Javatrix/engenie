@@ -2,26 +2,25 @@
 #include <GL/gl.h>
 #include <GLFW/glfw3.h>
 
+#include "engenie/camera.hpp"
+#include "engenie/component/component.hpp"
+#include "engenie/component/renderablecomponent.hpp"
+#include "engenie/engenie.hpp"
+#include "engenie/entity.hpp"
+#include "engenie/layer/layer.hpp"
+#include "engenie/material.hpp"
+#include "engenie/mesh.hpp"
+#include "engenie/shader.hpp"
+#include "engenie/window.hpp"
 #include "glm/detail/func_trigonometric.hpp"
 #include "glm/detail/type_vec.hpp"
-#include "unnamedEngine/camera.hpp"
-#include "unnamedEngine/component/component.hpp"
-#include "unnamedEngine/component/renderablecomponent.hpp"
-#include "unnamedEngine/entity.hpp"
-#include "unnamedEngine/layer/layer.hpp"
-#include "unnamedEngine/material.hpp"
-#include "unnamedEngine/mesh.hpp"
-#include "unnamedEngine/shader.hpp"
-#include "unnamedEngine/unnamedEngine.hpp"
-#include "unnamedEngine/window.hpp"
-#include <iostream>
 #include <memory>
 
 #define STB_IMAGE_IMPLEMENTATION
 #include "stb_image.h"
 
 using namespace std;
-using engine = unnamed_engine::Engine;
+using engine = engenie::Engine;
 
 Window window;
 

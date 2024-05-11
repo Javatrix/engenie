@@ -1,9 +1,9 @@
 #pragma once
 
-#include "unnamedEngine/layer/layerstack.hpp"
-#include "unnamedEngine/window.hpp"
+#include "engenie/layer/layerstack.hpp"
+#include "engenie/window.hpp"
 
-namespace unnamed_engine {
+namespace engenie {
 
 class Engine {
 public:
@@ -15,7 +15,7 @@ public:
   static Engine *getInstance();
   void init(const std::string &windowTitle, int windowWidth, int windowHeight);
   void run();
-  float getInterpolation();
+  float deltaTime();
   LayerStack &getLayerStack() { return m_layerStack; }
 
 private:
@@ -25,4 +25,4 @@ private:
   void render();
   LayerStack m_layerStack;
 };
-}; // namespace unnamed_engine
+}; // namespace engenie

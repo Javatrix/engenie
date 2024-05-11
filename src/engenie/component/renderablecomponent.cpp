@@ -1,10 +1,10 @@
-#include "unnamedEngine/component/renderablecomponent.hpp"
+#include "engenie/component/renderablecomponent.hpp"
+#include "engenie/component/component.hpp"
+#include "engenie/entity.hpp"
+#include "engenie/shader.hpp"
 #include "glm/detail/type_mat.hpp"
 #include "glm/detail/type_vec.hpp"
 #include "glm/gtc/matrix_transform.hpp"
-#include "unnamedEngine/component/component.hpp"
-#include "unnamedEngine/entity.hpp"
-#include "unnamedEngine/shader.hpp"
 
 Entity *parent = nullptr;
 

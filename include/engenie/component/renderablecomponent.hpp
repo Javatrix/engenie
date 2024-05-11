@@ -1,8 +1,8 @@
 #pragma once
 
-#include "unnamedEngine/component/component.hpp"
-#include "unnamedEngine/mesh.hpp"
-#include "unnamedEngine/shader.hpp"
+#include "engenie/component/component.hpp"
+#include "engenie/mesh.hpp"
+#include "engenie/shader.hpp"
 
 class RenderableComponent : public IEntityComponent {
 public:

@@ -1,7 +1,7 @@
-#include "unnamedEngine/math/transform.hpp"
+#include "engenie/math/transform.hpp"
+#include "engenie/engenie.hpp"
+#include "engenie/math/math.hpp"
 #include "glm/detail/type_vec.hpp"
-#include "unnamedEngine/math/math.hpp"
-#include "unnamedEngine/unnamedEngine.hpp"
 #include <sys/types.h>
 
 Transform::Transform(glm::vec3 position, glm::vec3 rotation, glm::vec3 scale)
@@ -22,16 +22,13 @@ void Transform::update() {
 }
 
 glm::vec3 Transform::getInterpolatedPosition() {
-  return getInterpolatedPosition(
-      unnamed_engine::Engine::getInstance()->getInterpolation());
+  return getInterpolatedPosition(engenie::Engine::getInstance()->deltaTime());
 }
 glm::vec3 Transform::getInterpolatedRotation() {
-  return getInterpolatedRotation(
-      unnamed_engine::Engine::getInstance()->getInterpolation());
+  return getInterpolatedRotation(engenie::Engine::getInstance()->deltaTime());
 }
 glm::vec3 Transform::getInterpolatedScale() {
-  return getInterpolatedScale(
-      unnamed_engine::Engine::getInstance()->getInterpolation());
+  return getInterpolatedScale(engenie::Engine::getInstance()->deltaTime());
 }
 
 glm::vec3 Transform::getInterpolatedPosition(float interpolation) {

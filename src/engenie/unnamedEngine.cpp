@@ -1,5 +1,5 @@
-#include "unnamedEngine/unnamedEngine.hpp"
-#include "unnamedEngine/layer/layer.hpp"
+#include "engenie/engenie.hpp"
+#include "engenie/layer/layer.hpp"
 
 #include <iostream>
 #include <sys/types.h>
@@ -8,7 +8,7 @@ void glfwError(int error, const char *description) {
   fprintf(stderr, "GLFW error: %s\n", description);
 }
 
-using namespace unnamed_engine;
+using namespace engenie;
 
 Engine *Engine::instance = nullptr;
 float interpolation = 0;
@@ -79,7 +79,7 @@ void Engine::render() {
   window.update();
 }
 
-float Engine::getInterpolation() { return interpolation; }
+float Engine::deltaTime() { return interpolation; }
 
 void Engine::mouseInput(GLFWwindow *window, double xpos, double ypos) {
   if (!getInstance()) {

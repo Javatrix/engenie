@@ -3,7 +3,7 @@
 #include <glm/glm.hpp>
 #include <string>
 
-#include "unnamedEngine/material.hpp"
+#include "engenie/material.hpp"
 
 class Shader {
 public:
