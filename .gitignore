@@ -1,2 +1,4 @@
-build/
-.cache/
+Engenie-App/.cache
+Engenie-App/build
+Engenie-Core/.cache
+Engenie-Core/build

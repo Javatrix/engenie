@@ -14,7 +14,6 @@
 #include "engenie/window.hpp"
 #include "glm/detail/func_trigonometric.hpp"
 #include "glm/detail/type_vec.hpp"
-#include <memory>
 
 #define STB_IMAGE_IMPLEMENTATION
 #include "stb_image.h"
