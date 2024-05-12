@@ -29,10 +29,6 @@ Mesh::Mesh(const std::string &modelName, const std::string &textureName) {
       Vertex v;
       aiVector3D vertex = mesh->mVertices[j];
       v.position = glm::vec3(vertex.x, vertex.y, vertex.z);
-      nonIndexedVertices.push_back(v);
-      if (find(vertices.begin(), vertices.end(), v) == vertices.end()) {
-        vertices.push_back(v);
-      }
 
       if (mesh->HasNormals()) {
         aiVector3D normal = mesh->mNormals[j];
@@ -46,6 +42,11 @@ Mesh::Mesh(const std::string &modelName, const std::string &textureName) {
         v.textureCoords = glm::vec2(texCoord.x, texCoord.y);
       } else {
         v.textureCoords = glm::vec2(0.0f, 0.0f);
+      }
+
+      nonIndexedVertices.push_back(v);
+      if (find(vertices.begin(), vertices.end(), v) == vertices.end()) {
+        vertices.push_back(v);
       }
     }
 
