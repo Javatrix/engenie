@@ -82,10 +82,7 @@ int main(int argc, char *argv[]) {
 }
 
 void processInput() {
-  if (window.isKeyPressed(GLFW_KEY_ESCAPE)) {
-    window.close();
-  }
-  float speed = 0.5f;
+  float speed = 0.25f;
   if (window.isKeyPressed(GLFW_KEY_W)) {
     camera.transform.position += speed * camera.direction;
   }
