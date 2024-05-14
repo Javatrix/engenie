@@ -2,42 +2,26 @@
 
 #include "engenie/component/component.hpp"
 #include "engenie/math/transform.hpp"
-#include "glm/glm.hpp"
-#include <memory>
-#include <unordered_set>
+#include <cstdint>
+#include <random>
+#include <vector>
 
 class World;
 
 class Entity {
 public:
   Transform transform;
+  Entity() {
+    std::random_device rd;
+    std::mt19937_64 gen(rd());
+    std::uniform_int_distribution<uint64_t> random;
+    m_uuid = random(gen);
+  }
   virtual void update();
-  void addComponent(std::shared_ptr<IEntityComponent> component);
-  void removeComponent(std::shared_ptr<IEntityComponent> component);
-  template <typename T>
-  typename std::enable_if<std::is_base_of<IEntityComponent, T>::value,
-                          bool>::type
-  hasComponent() {
-    for (const auto &component : m_components) {
-      if (dynamic_cast<T *>(component.get()) != nullptr) {
-        return true;
-      }
-    }
-    return false;
-  }
-  template <typename T>
-  typename std::enable_if<std::is_base_of<IEntityComponent, T>::value,
-                          T *>::type
-  getComponent() {
-    for (const auto &component : m_components) {
-      if (dynamic_cast<T *>(component.get()) != nullptr) {
-        return dynamic_cast<T *>(component.get());
-      }
-    }
-    return nullptr;
-  }
+  uint64_t uuid() { return m_uuid; }
 
 private:
   World *m_world;
-  std::unordered_set<std::shared_ptr<IEntityComponent>> m_components;
+  uint64_t m_uuid;
+  std::vector<IEntityComponent *> m_components;
 };

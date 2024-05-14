@@ -1,10 +1,10 @@
 #include "glad/glad.h"
 #include <GL/gl.h>
 #include <GLFW/glfw3.h>
+#include <memory>
 
 #include "engenie/camera.hpp"
 #include "engenie/component/component.hpp"
-#include "engenie/component/renderablecomponent.hpp"
 #include "engenie/engenie.hpp"
 #include "engenie/entity.hpp"
 #include "engenie/layer/layer.hpp"
@@ -12,7 +12,6 @@
 #include "engenie/mesh.hpp"
 #include "engenie/shader.hpp"
 #include "engenie/window.hpp"
-#include "glm/detail/func_trigonometric.hpp"
 #include "glm/detail/type_vec.hpp"
 
 #define STB_IMAGE_IMPLEMENTATION
@@ -39,30 +38,39 @@ Shader *shader;
 
 class OurGameLayer : public Layer {
   void render() override {
-    Shader shader = entity.getComponent<RenderableComponent>()->shader;
+    // Shader shader = entity.getComponent<RenderableComponent>()->shader;
 
-    shader.use();
+    // shader.use();
 
-    diffuseDir.y = glm::cos(glm::radians(angle));
-    diffuseDir.x = glm::sin(glm::radians(angle));
-    diffuseDir.z = glm::sin(glm::radians(angle2));
-    shader.setFloat("ambientStrength", 0.2);
-    shader.setVec3("diffuseDir", diffuseDir);
-    shader.setVec4("diffuseColor", diffuseColor);
-    shader.setVec3("viewPos", camera.transform.getInterpolatedPosition());
-    shader.setFloat("specularity", 0.4);
-    shader.setFloat("shininess", 256);
-    shader.setMaterial("material", mat);
-    shader.setMat4("projection",
-                   camera.getProjection(window.getWidth(), window.getHeight()));
-    shader.setMat4("view", camera.getView());
-    entity.getComponent<RenderableComponent>()->render();
+    // diffuseDir.y = glm::cos(glm::radians(angle));
+    // diffuseDir.x = glm::sin(glm::radians(angle));
+    // diffuseDir.z = glm::sin(glm::radians(angle2));
+    // shader.setFloat("ambientStrength", 0.2);
+    // shader.setVec3("diffuseDir", diffuseDir);
+    // shader.setVec4("diffuseColor", diffuseColor);
+    // shader.setVec3("viewPos", camera.transform.getInterpolatedPosition());
+    // shader.setFloat("specularity", 0.4);
+    // shader.setFloat("shininess", 256);
+    // shader.setMaterial("material", mat);
+    // shader.setMat4("projection",
+    //                camera.getProjection(window.getWidth(),
+    //                window.getHeight()));
+    // shader.setMat4("view", camera.getView());
+    // entity.getComponent<RenderableComponent>()->render();
   }
   void update() override {
     camera.update();
     entity.update();
     processInput();
   }
+};
+
+class TestComponent : public IEntityComponent {
+  void updateParent(Entity *parent) override {}
+};
+
+class TestComponent2 : public IEntityComponent {
+  void updateParent(Entity *parent) override {}
 };
 
 int main(int argc, char *argv[]) {
@@ -74,9 +82,15 @@ int main(int argc, char *argv[]) {
   shader = new Shader("resources/shaders/vertex.glsl",
                       "resources/shaders/fragment.glsl");
 
-  entity.addComponent(std::make_shared<RenderableComponent>(mesh, *shader));
-
   Layer *mainLayer = new OurGameLayer();
+
+  shared_ptr<TestComponent> test = make_shared<TestComponent>();
+  shared_ptr<TestComponent2> test2 = make_shared<TestComponent2>();
+  shared_ptr<TestComponent> test3 = make_shared<TestComponent>();
+  engine::getInstance()->componentManager.addComponent(test);
+  engine::getInstance()->componentManager.addComponent(test2);
+  engine::getInstance()->componentManager.addComponent(test3);
+  return 0;
   engine::getInstance()->getLayerStack().pushLayer(mainLayer);
   engine::getInstance()->run();
 }

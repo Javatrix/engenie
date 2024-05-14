@@ -1,10 +1,10 @@
 #pragma once
 
+#include "engenie/component/component.hpp"
 #include "engenie/layer/layerstack.hpp"
 #include "engenie/window.hpp"
 
 namespace engenie {
-
 class Engine {
 public:
   Window window;
@@ -17,6 +17,7 @@ public:
   void run();
   float deltaTime();
   LayerStack &getLayerStack() { return m_layerStack; }
+  ComponentManager componentManager;
 
 private:
   static Engine *instance;
