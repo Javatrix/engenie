@@ -24,8 +24,8 @@ public:
   uint64_t uuid() { return m_uuid; }
   template <typename T>
   typename std::enable_if<std::is_base_of<EntityComponent, T>::value, T *>::type
-  addComponent(T component) {
-    m_components.push_back(component);
+  addComponent(T &component) {
+    m_components.push_back(&component);
     return &component;
   }
   template <typename T>

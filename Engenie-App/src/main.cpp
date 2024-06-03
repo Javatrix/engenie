@@ -1,5 +1,5 @@
 #include "glad/glad.h"
-#include <GL/gl.h>
+
 #include <GLFW/glfw3.h>
 
 #include "engenie/camera.hpp"
@@ -11,6 +11,8 @@
 #include "engenie/shader.hpp"
 #include "engenie/window.hpp"
 #include "glm/detail/type_vec.hpp"
+
+#include "engenie/component/testcomponent.hpp"
 
 #define STB_IMAGE_IMPLEMENTATION
 #include "stb_image.h"
@@ -73,7 +75,9 @@ int main(int argc, char *argv[]) {
   Layer *mainLayer = new OurGameLayer();
 
   engine::getInstance()->getLayerStack().pushLayer(mainLayer);
-  camera.addComponent() engine::getInstance()->run();
+  TestComponent c(camera);
+  camera.addComponent(c);
+  engine::getInstance()->run();
 }
 
 void processInput() {
