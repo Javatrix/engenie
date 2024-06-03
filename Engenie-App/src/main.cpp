@@ -73,7 +73,7 @@ int main(int argc, char *argv[]) {
   Layer *mainLayer = new OurGameLayer();
 
   engine::getInstance()->getLayerStack().pushLayer(mainLayer);
-  engine::getInstance()->run();
+  camera.addComponent() engine::getInstance()->run();
 }
 
 void processInput() {
