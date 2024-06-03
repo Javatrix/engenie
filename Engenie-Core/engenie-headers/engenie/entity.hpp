@@ -1,10 +1,8 @@
 #pragma once
 
-#include "engenie/component/component.hpp"
 #include "engenie/math/transform.hpp"
 #include <cstdint>
 #include <random>
-#include <vector>
 
 class World;
 
@@ -23,5 +21,4 @@ public:
 private:
   World *m_world;
   uint64_t m_uuid;
-  std::vector<IEntityComponent *> m_components;
 };

@@ -1,4 +1,5 @@
 #include "engenie/camera.hpp"
+#include "engenie/entity.hpp"
 #include "glm/detail/type_vec.hpp"
 #include "glm/gtc/matrix_transform.hpp"
 
@@ -6,7 +7,7 @@ Camera::Camera(glm::vec3 position, float fov)
     : Camera(position, fov, 0.001f, 10000) {}
 
 Camera::Camera(glm::vec3 position, float fov, float near, float far)
-    : m_fov(fov) {
+    : m_fov(fov), Entity() {
   setNearAndFar(near, far);
 }
 

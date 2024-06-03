@@ -1,6 +1,5 @@
 #pragma once
 
-#include "engenie/component/component.hpp"
 #include "engenie/entity.hpp"
 #include "glm/detail/type_vec.hpp"
 #include "glm/glm.hpp"

@@ -1,5 +1,6 @@
 #pragma once
 
+#include "glm/detail/type_mat.hpp"
 #include "glm/detail/type_vec.hpp"
 #include "glm/glm.hpp"
 
@@ -18,6 +19,7 @@ public:
   glm::vec3 getInterpolatedPosition(float interpolation);
   glm::vec3 getInterpolatedRotation(float interpolation);
   glm::vec3 getInterpolatedScale(float interpolation);
+  glm::mat4 createModelMatrix();
 
 private:
   glm::vec3 m_lastPosition = glm::vec3(position),
