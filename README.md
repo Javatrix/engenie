@@ -1,5 +1,5 @@
 <p align="center">
-<img src="https://i.imgur.com/SgaLRWZ.png" width="50%" alt="tsuki-chan"/>
+<img src="https://i.imgur.com/SgaLRWZ.png" width="50%" alt="logo"/>
 </p>
 
 <h1 align="center">WORK IN PROGRESS</h1>
